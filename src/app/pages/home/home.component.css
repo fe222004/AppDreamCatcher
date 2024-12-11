@@ -1,0 +1,10 @@
+  /* Ocultar la barra de desplazamiento, pero mantener la funcionalidad de desplazamiento */
+  .center-section::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Para otros navegadores */
+  .center-section {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;     /* Firefox */
+  }

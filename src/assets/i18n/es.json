@@ -1,0 +1,53 @@
+{
+  "dashboard": {
+    "title": "No hay imagen disponible para este post."
+  },
+  "nav": {
+    "search": "Buscar"
+  },
+  "profile": {
+    "description": "“No podemos resolver nuestros problemas con el mismo pensamiento que usamos cuando los creamos”. - Albert Einstein"
+  },
+  "profile1": {
+    "followers": "Seguidores"
+  },
+  "profile2": {
+    "following": "Seguidos"
+  },
+  "profile3": {
+    "post": "Publicaciones"
+  },
+  "profile4": {
+    "information": "Detalles:"
+  },
+  "profile5": {
+    "city": "Vive en Quito"
+  },
+  "profile6": {
+    "status": "Soltera"
+  },
+  "profile7": {
+    "profession": "Desarrollador de Software"
+  },
+  "nav1": {
+    "logout": "Salir"
+  },
+  "register": {
+    "title": "¡Bienvenido!",
+    "instruction": "Registrate para continuar",
+    "last":"Apellido",
+    "first":"Nombre",
+    "email":"Correo Electronico",
+    "password": "Contraseña",
+    "profile": "Arrastre y suelte una imagen aquí o haga clic para seleccionarla.",
+    "choose": "Elegir archivo",
+    "change": "Cambiar imagen",
+    "button": "Registrarse"
+  },
+  "alert": {
+    "success_title": "¡Registro Exitoso!",
+    "success_message": "Tu cuenta ha sido creada satisfactoriamente. ¡Bienvenido!",
+    "accept_button": "Aceptar"
+  }
+}
+
