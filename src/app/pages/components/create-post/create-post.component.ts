@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'; 
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/components/service/auth.service';
 import { PostService } from '../../services/post.service';
@@ -45,7 +45,9 @@ export class CreatePostComponent {
   chooseImage() {
     console.log('Abrir selector de imagen');
     const fileInputImage = document.getElementById('fileInputImage') as HTMLInputElement;
-    fileInputImage.click();
+    if (fileInputImage) {
+      fileInputImage.click();
+    }
   }
 
   chooseVideo() {
