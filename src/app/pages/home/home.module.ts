@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { NavModule } from '../components/nav/nav.module';
 import { ProfileModule } from '../components/profile/profile.module';
 import { EditUserModule } from '../components/edit-user/edit-user.module';
+import { CreatePostModule } from '../components/create-post/create-post.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EditUserModule } from '../components/edit-user/edit-user.module';
     HomeRoutingModule,
     NavModule,
     ProfileModule,
-    EditUserModule
+    EditUserModule,
+    CreatePostModule
   ],
   exports:[HomeComponent]
 })
