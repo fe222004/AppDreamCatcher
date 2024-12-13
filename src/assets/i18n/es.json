@@ -2,6 +2,47 @@
   "dashboard": {
     "title": "No hay imagen disponible para este post."
   },
+  "title": "Appliance Care",
+  "login": {
+    "title": "Iniciar sesión en su cuenta",
+    "emailLabel": "Dirección de correo electrónico",
+    "passwordLabel": "Contraseña",
+    "requiredFieldError": "Este campo es requerido",
+    "invalidEmailError": "Correo electrónico no válido",
+    "passwordRequirementsError": "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial",
+    "signInButton": "Iniciar sesión",
+    "registerPrompt": "¿No tienes una cuenta?",
+    "registerLink": "Regístrate aquí"
+  },
+  "register": {
+    "title": "Registrarse",
+    "first_name_label": "Nombre",
+    "last_name_label": "Apellido",
+    "email_label": "Dirección de correo electrónico",
+    "password_label": "Contraseña",
+    "phone_number_label": "Número de celular",
+    "address_label": "Dirección",
+    "preferred_contact_method_label": "Método de contacto preferido",
+    "upload_file_label": "Subir un archivo",
+    "first_name_required": "El nombre es requerido.",
+    "first_name_minlength": "El nombre debe contener al menos 1 carácter.",
+    "first_name_maxlength": "El nombre puede contener hasta 40 caracteres.",
+    "last_name_required": "El apellido es requerido.",
+    "last_name_minlength": "El apellido debe contener al menos 1 carácter.",
+    "last_name_maxlength": "El apellido puede contener hasta 40 caracteres.",
+    "email_required": "El correo electrónico es requerido.",
+    "email_pattern": "Correo electrónico no válido.",
+    "password_required": "La contraseña es requerida.",
+    "password_pattern": "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.",
+    "phone_number_required": "El número de celular es requerido.",
+    "phone_number_pattern": "Solo se permiten números.",
+    "address_required": "La dirección es requerida.",
+    "service_type_required": "El tipo de servicio es requerido.",
+    "province_required": "La provincia es requerida.",
+    "brand_required": "La marca es requerida.",
+    "preferred_contact_method_required": "El método de contacto preferido es requerido.",
+    "submit_button": "Registro"
+  },
   "nav": {
     "search": "Buscar"
   },
@@ -32,21 +73,14 @@
   "nav1": {
     "logout": "Salir"
   },
-  "register": {
-    "title": "¡Bienvenido!",
-    "instruction": "Registrate para continuar",
-    "last":"Apellido",
-    "first":"Nombre",
-    "email":"Correo Electronico",
-    "password": "Contraseña",
-    "profile": "Arrastre y suelte una imagen aquí o haga clic para seleccionarla.",
-    "choose": "Elegir archivo",
-    "change": "Cambiar imagen",
-    "button": "Registrarse"
-  },
   "alert": {
     "success_title": "¡Registro Exitoso!",
     "success_message": "Tu cuenta ha sido creada satisfactoriamente. ¡Bienvenido!",
+    "accept_button": "Aceptar"
+  },
+  "alertIncomplete": {
+    "fields_incomplete_title": "Completa todos los campos",
+    "fields_incomplete_message": "Por favor, asegúrate de llenar todos los campos requeridos antes de continuar.",
     "accept_button": "Aceptar"
   }
 }

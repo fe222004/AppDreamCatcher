@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { NavModule } from 'src/app/components/nav/nav.module';
 import { HomeComponent } from './home.component';
-import { ProfileModule } from 'src/app/components/profile/profile.module';
+import { NavModule } from '../components/nav/nav.module';
+import { ProfileModule } from '../components/profile/profile.module';
+import { EditUserModule } from '../components/edit-user/edit-user.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ProfileModule } from 'src/app/components/profile/profile.module';
     CommonModule,
     HomeRoutingModule,
     NavModule,
-    ProfileModule
+    ProfileModule,
+    EditUserModule
   ],
   exports:[HomeComponent]
 })

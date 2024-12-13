@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-home',  // El selector debe ser correcto
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   // Lógica del componente
+  modalVisible = false;
+
+  constructor(private modalService: ModalService) {
+    this.modalService.modalVisibility$.subscribe(visible => {
+      this.modalVisible = visible;
+    });
+  }
 }

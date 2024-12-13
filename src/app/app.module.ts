@@ -10,6 +10,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './pages/home/home.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from './components/auth/login/login.module';
+import { RegisterModule } from './components/auth/register/register.module';
+import { AuthModule } from './components/auth/auth.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,6 +26,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     HttpClientModule, 
     RouterModule,
+    AuthModule,
+    ReactiveFormsModule,
     BrowserModule,
     TranslateModule.forRoot({
       defaultLanguage: 'es',

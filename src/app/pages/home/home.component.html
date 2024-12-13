@@ -1,71 +1,78 @@
 <body class="bg-gray-200">
-    <!-- Fondo gris para toda la página -->
-    <main>
-      <!-- Header -->
-      <div class="bg-white shadow-md">
-        <app-nav></app-nav>
-      </div>
-  
-      <!-- Main Content -->
-      <div class="container mx-auto p-4">
-        <!-- Layout Responsivo -->
-        <div class="flex flex-col lg:flex-row gap-8">
-          <!-- Sección izquierda (perfil del usuario) -->
-          <section class="left-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full">
-            <!-- Contenido de la sección izquierda -->
-            <app-profile></app-profile>
-          </section>
-  <!-- Sección central -->
-<section class="center-section p-6 rounded-xl w-full lg:w-1/2 max-w-full overflow-y-auto h-screen">
-    <!-- Tarjetas dentro de la sección central -->
-    <div class="space-y-8 mt-6">
-      <!-- Tarjeta 1 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 1</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 1.</p>
-      </div>
-  
-      <!-- Tarjeta 2 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 2</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 2.</p>
-      </div>
-  
-      <!-- Tarjeta 3 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 3</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 3.</p>
-      </div>
-  
-      <!-- Tarjeta 4 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 4</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 4.</p>
-      </div>
-  
-      <!-- Tarjeta 5 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 5</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 5.</p>
-      </div>
-  
-      <!-- Tarjeta 6 -->
-      <div class="bg-white p-6 rounded-xl border border-gray-200">
-        <h3 class="text-xl font-semibold text-gray-800">Tarjeta 6</h3>
-        <p class="text-gray-600 mt-2">Contenido de la tarjeta 6.</p>
+  <!-- Fondo gris para toda la página -->
+  <main>
+    <!-- Header -->
+    <div class="bg-white shadow-md">
+      <!--<app-nav></app-nav>-->
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-4">
+      <!-- Layout Responsivo -->
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sección izquierda (perfil del usuario) -->
+        <section class="left-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full">
+          <!-- Contenido de la sección izquierda -->
+          <app-profile></app-profile>
+        </section>
+
+        <section *ngIf="modalVisible"
+          class="center-section p-6 rounded-xl w-full lg:w-1/2 max-w-full overflow-y-auto h-screen">
+
+          <app-edit-user *ngIf="modalVisible"></app-edit-user>
+
+        </section>
+        <!-- Sección central -->
+        <section *ngIf="!modalVisible"
+          class="center-section p-6 rounded-xl w-full lg:w-1/2 max-w-full overflow-y-auto h-screen">
+          <!-- Tarjetas dentro de la sección central -->
+          <div class="space-y-8 mt-6">
+            <!-- Tarjeta 1 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 1</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 1.</p>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 2</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 2.</p>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 3</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 3.</p>
+            </div>
+
+            <!-- Tarjeta 4 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 4</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 4.</p>
+            </div>
+
+            <!-- Tarjeta 5 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 5</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 5.</p>
+            </div>
+
+            <!-- Tarjeta 6 -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-800">Tarjeta 6</h3>
+              <p class="text-gray-600 mt-2">Contenido de la tarjeta 6.</p>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- Sección derecha -->
+        <section class="right-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full">
+          <!-- Contenido de la sección derecha -->
+          <h2 class="text-2xl font-semibold text-gray-800">Sección Derecha</h2>
+          <p class="text-gray-600 mt-2">Contenido adicional aquí.</p>
+        </section>
       </div>
     </div>
-  </section>
-  
-  
-          <!-- Sección derecha -->
-          <section class="right-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full">
-            <!-- Contenido de la sección derecha -->
-            <h2 class="text-2xl font-semibold text-gray-800">Sección Derecha</h2>
-            <p class="text-gray-600 mt-2">Contenido adicional aquí.</p>
-          </section>
-        </div>
-      </div>
-    </main>
-  </body>
-  
+  </main>
+</body>

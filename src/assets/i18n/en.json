@@ -1,4 +1,45 @@
 {
+  
+  "login": {
+    "title": "Sign in to your account",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "requiredFieldError": "This field is required",
+    "invalidEmailError": "Invalid email address",
+    "passwordRequirementsError": "Password must contain at least one uppercase letter, one lowercase letter, a number, and a special character",
+    "signInButton": "Sign In",
+    "registerPrompt": "Don't have an account?",
+    "registerLink": "Sign up here"
+  },
+  "register": {
+    "title": "Register",
+    "first_name_label": "First name",
+    "last_name_label": "Last name",
+    "email_label": "Email address",
+    "password_label": "Password",
+    "phone_number_label": "Phone number",
+    "address_label": "Address",
+    "preferred_contact_method_label": "Preferred contact method",
+    "upload_file_label": "Upload a file",
+    "first_name_required": "First name is required.",
+    "first_name_minlength": "First name must contain at least 1 character.",
+    "first_name_maxlength": "First name can contain up to 40 characters.",
+    "last_name_required": "Last name is required.",
+    "last_name_minlength": "Last name must contain at least 1 character.",
+    "last_name_maxlength": "Last name can contain up to 40 characters.",
+    "email_required": "Email address is required.",
+    "email_pattern": "Invalid email address.",
+    "password_required": "Password is required.",
+    "password_pattern": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+    "phone_number_required": "Phone number is required.",
+    "phone_number_pattern": "Only numbers are allowed.",
+    "address_required": "Address is required.",
+    "service_type_required": "Service type is required.",
+    "province_required": "Province is required.",
+    "brand_required": "Brand is required.",
+    "preferred_contact_method_required": "Preferred contact method is required.",
+    "submit_button": "Register"
+  },
   "dashboard": {
     "title": "No image available for this post."
   },

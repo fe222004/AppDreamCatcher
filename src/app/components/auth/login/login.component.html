@@ -1,0 +1,92 @@
+<div class="relative min-h-screen flex items-center justify-center bg-gray-50">
+  <img [src]="kitchenImage" alt="Fondo" class="absolute inset-0 w-full h-full object-cover z-0">
+  <div class="absolute inset-0 bg-gray-900/50 z-0"></div>
+  <div
+    class="relative z-10 w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 px-4 pt-12 pb-24 sm:px-6 sm:pt-16 sm:pb-32 lg:px-8">
+    <div class="relative hidden lg:block">
+      <img [src]="kitchenImageTwo" alt="Lado" class="w-full h-full object-cover rounded-lg shadow-lg">
+    </div>
+    <div class="bg-white p-8 rounded-lg shadow-lg lg:-ml-1">
+      <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <img class="mx-auto h-10 w-auto" [src]="urls.logos.logo" alt="Your Company">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          {{ 'login.title' | translate }}
+        </h2>
+      </div>
+
+      <div class="absolute top-20 right-325 z-10">
+        <button (click)="gotoIndex()"
+          class="inline-flex items-center justify-center w-10 h-10 bg-indigo-600 rounded-md shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          title="Go to Home">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6" action="#" method="POST">
+          <div>
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">
+              {{ 'login.emailLabel' | translate }} <span class="text-red-500">*</span>
+            </label>
+            <div class="mt-1">
+              <input id="email" formControlName="email" name="email" type="email" autocomplete="email" required
+                [class.border-red-500]="isFieldInvalid('email')"
+                class="block w-full px-3 py-2 placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div
+              *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']" class="text-red-500 text-sm">
+                {{ 'login.requiredFieldError' | translate }}
+              </div>
+              <div *ngIf="loginForm.get('email')?.errors?.['pattern']" class="text-red-500 text-sm">
+                {{ 'login.invalidEmailError' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+              {{ 'login.passwordLabel' | translate }} <span class="text-red-500">*</span>
+            </label>
+            <div class="mt-2 relative">
+              <input [type]="showPassword ? 'text' : 'password'" id="password" name="password"
+                formControlName="password"
+                class="block w-full px-3 py-2 placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10"
+                placeholder="Ingrese su contraseña">
+              <button type="button" (click)="togglePasswordVisibility()"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-purple-600">
+                <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <div
+              *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']" class="text-red-500 text-sm">
+                {{ 'login.requiredFieldError' | translate }}
+              </div>
+              <div *ngIf="loginForm.get('password')?.errors?.['pattern']" class="text-red-500 text-sm">
+                {{ 'login.passwordRequirementsError' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              {{ 'login.signInButton' | translate }}
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-10 text-center text-sm text-gray-500">
+          {{ 'login.registerPrompt' | translate }}
+          <a routerLink="/auth/register" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            {{ 'login.registerLink' | translate }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
