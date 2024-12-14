@@ -9,8 +9,8 @@ import { PostI } from "src/app/models/post.interface";
 export class PostService {
   private readonly httpClient = inject(HttpClient);
 
-  private readonly apiUrl: string = 'http://localhost:3000/posts'; // Cambiar URL si es necesario para historias
-  private readonly apiImg: string = 'http://localhost:3000'; 
+  private readonly apiUrl: string = 'http://localhost:3009/posts'; // Cambiar URL si es necesario para historias
+  private readonly apiImg: string = 'http://localhost:3009'; 
   constructor() {}
 
   // Obtener todas las historias
@@ -24,19 +24,12 @@ export class PostService {
           text: post.text || undefined,
           tag: post.tag || undefined,
           userId: post.userId || undefined,
-          image: post.image ? `${this.apiImg}/uploads/posts/${post.image}` : undefined,
-          user: {
-            id: post.user?.id || undefined,
-            firstname: post.user?.firstname || undefined,
-            lastname: post.user?.lastname || undefined,
-            email: post.user?.email || undefined,
-            description: post.user?.description || undefined,
-            image: post.user?.image ? `${this.apiImg}/uploads/${post.user.image}` : undefined,
-          }
+          image: post.media ? `${this.apiImg}/uploads/posts/${post.media}` : undefined,  // Cambio aquí a 'media'
         }));
       })
     );
   }
+  
   createPost(formData: FormData): Observable<PostI> {
     return this.httpClient.post<PostI>(this.apiUrl, formData).pipe(
       map((post: PostI) => ({

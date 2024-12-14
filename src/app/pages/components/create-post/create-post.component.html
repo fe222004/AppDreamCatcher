@@ -1,83 +1,35 @@
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="input-group mb-3">
-        <!-- Imagen de perfil -->
-        <img class="rounded-circle profile-image"
-          src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image">
-  
-        <!-- Etiqueta ¿Qué está pensando? -->
-        <input type="text" class="form-control" [placeholder]="'post.post-text' | translate" formControlName="text"
-          style="border-radius: 35px;" [ngClass]="{ 'd-none': imageSrc || videoSrc }" />
-  
-        <!-- Separador cuando n0 hay imagen o video seleccionado -->
-        <div *ngIf="!imageSrc && !videoSrc" class="separator"></div>
-  
-        <!-- Campo de etiqueta si se selecciona imagen o video -->
-        <ng-container *ngIf="imageSrc || videoSrc">
-          <span class="user-name">Niurka Cóndor</span>
-          <input type="text" class="form-control custom-input" placeholder="¿ Niurka?" formControlName="tag"
-            style="border-radius: 35px;" />
-        </ng-container>
+<!-- Sección para previsualizar y seleccionar imagen -->
+<div class="input-group mb-3">
+    <!-- Selección de imagen -->
+    <div class="relative">
+      <div class="w-32 h-32 rounded-full bg-gray-200 overflow-hidden shadow-md">
+        <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
+        <label for="media" class="cursor-pointer w-full h-full flex items-center justify-center text-gray-600">
+          <!-- Vista previa de la imagen seleccionada -->
+          <img [src]="imageSrc" alt="Imagen seleccionada" class="w-full h-full object-cover" />
+        </label>
       </div>
+    </div>
+  </div>
   
-      <!-- Botones para seleccionar imagen y video -->
-      <div class="input-group mb-3">
-        <div class="button-group">
-          <!-- Botón de imagen, solo visible cuando no se ha seleccionado imagen o video -->
-          <button *ngIf="!imageSrc && !videoSrc" type="button" class="btn-select-post" (click)="chooseImage()">
-            <i class="bi bi-image"></i>
-            <span class="tooltip-text">Multimedia</span>
-          </button>
+  <!-- Formulario para los inputs del post -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Contenedor para los inputs de texto y etiqueta -->
+    <div class="input-group mb-3">
+      <!-- Imagen de perfil a la izquierda -->
+      <img class="rounded-full w-16 h-16 object-cover mr-4" src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image" />
+    
+      <!-- Contenedor para los inputs del post (texto y etiqueta) -->
+      <div class="w-full">
+        <!-- Input para el texto del post -->
+        <input type="text" class="form-control w-full mb-2" formControlName="text" placeholder="¿Qué estás pensando?" />
   
-          <!-- Botón de video, solo visible cuando no se ha seleccionado imagen o video -->
-          <button *ngIf="!imageSrc && !videoSrc" type="button" class="btn-select-post" (click)="chooseVideo()">
-            <i class="bi bi-camera-video-fill"></i>
-            <span class="tooltip-text">Video</span>
-          </button>
-  
-  
-          <!-- Botón de publicar, solo visible cuando el campo de texto tiene valor -->
-          <button *ngIf="isButtonVisible" type="button" class="btn-post" (click)="onSubmit()">Postear</button>
-        </div>
-  
-        <!-- Contenedor para botones con la clase .btn-select-post2 -->
-        <div class="button-group2" *ngIf="imageSrc || videoSrc">
-          <button type="button" class="btn-select-post2" (click)="chooseImage()">
-            <i class="bi bi-image"></i>
-            <span class="tooltip-text">Multimedia</span>
-          </button>
-  
-          <button type="button" class="btn-select-post2" (click)="chooseVideo()">
-            <i class="bi bi-camera-video-fill"></i>
-            <span class="tooltip-text">Video</span>
-          </button>
-        </div>
-  
-        <!-- Input para archivo oculto -->
-        <input type="file" id="fileInputImage" (change)="getImageFile($event)" style="display: none;" accept="image/*" />
-        <input type="file" id="fileInputVideo" (change)="getVideoFile($event)" style="display: none;" accept="video/*" />
+        <!-- Input para la etiqueta del post (ej. música, deporte, etc) -->
+        <input type="text" class="form-control w-full" formControlName="tag" placeholder="Etiqueta (Música, Deporte, etc)" />
       </div>
+    </div>
   
-      <!-- Previsualización de imagen seleccionada -->
-      <div *ngIf="imageSrc" class="image-preview-container">
-        <img [src]="imageSrc" alt="Imagen seleccionada" class="img-fluid rounded" />
-      </div>
+    <!-- Botón de publicar, visible siempre -->
+    <button type="submit" class="btn btn-custom-primary">Publicar</button>
+  </form>
   
-      <!-- Previsualización de video seleccionado -->
-      <div *ngIf="videoSrc" class="video-preview-container">
-        <video [src]="videoSrc" controls class="video-fluid rounded"></video>
-      </div>
-  
-      <!-- Línea separadora cuando se ha seleccionado imagen o video -->
-      <div *ngIf="imageSrc || videoSrc" class="separator-line"></div>
-  
-      <!-- Botón de postear, solo visible cuando se ha seleccionado imagen o video -->
-      <button *ngIf="imageSrc || videoSrc" type="submit" class="btn btn-custom-primary">Postear</button>
-  
-      <!-- Botón de eliminar imagen o video, visible cuando hay imagen o video seleccionado -->
-      <div *ngIf="imageSrc || videoSrc" class="button-group">
-        <button type="button" class="btn-circle btn-danger btn-tooltip" (click)="clearMedia()">
-          <i class="bi bi-x-lg"></i>
-          <span class="tooltip-eliminar">Eliminar</span>
-        </button>
-      </div>
-    </form>

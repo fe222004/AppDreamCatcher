@@ -7,6 +7,7 @@ import { NavModule } from '../components/nav/nav.module';
 import { ProfileModule } from '../components/profile/profile.module';
 import { EditUserModule } from '../components/edit-user/edit-user.module';
 import { CreatePostModule } from '../components/create-post/create-post.module';
+import { PostModule } from '../components/post/post.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CreatePostModule } from '../components/create-post/create-post.module';
     NavModule,
     ProfileModule,
     EditUserModule,
-    CreatePostModule
+    CreatePostModule,
+    PostModule
   ],
   exports:[HomeComponent]
 })

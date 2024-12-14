@@ -108,6 +108,7 @@ private readonly dataTransferService: DataTransferServiceService = inject(
   }
 
   getFileAvatar(event: Event): void {
+    console.log(event)
     // Asegurarse de que event.target no es null y es un HTMLInputElement
     const input = event.target as HTMLInputElement;
 

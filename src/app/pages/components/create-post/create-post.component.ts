@@ -1,13 +1,14 @@
-import { Component, inject } from '@angular/core'; 
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/components/service/auth.service';
 import { PostService } from '../../services/post.service';
 import { PostI } from 'src/app/models/post.interface';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.css']
+  styleUrls: ['./create-post.component.css'],
 })
 export class CreatePostComponent {
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
@@ -16,21 +17,25 @@ export class CreatePostComponent {
 
   public userId: string | null = null; // Cambiado para obtener el ID desde localStorage
   form: FormGroup; // Formulario para capturar el contenido del post
-  imageSrc: string | ArrayBuffer | null = null; // Vista previa de la imagen
-  videoSrc: string | ArrayBuffer | null = null; // Vista previa del video
-  isButtonVisible: boolean = false; // Si el botón de publicación debe estar habilitado
 
-  constructor() {
+  public media: any[] = [];
+  public imageSrc: string | ArrayBuffer | null = null; // Vista previa de la imagen
+
+  constructor(private sanitizer: DomSanitizer) {
     console.log('Constructor ejecutado: Inicializando componente');
     this.form = this.buildForm();
+    this.getUserIdFromLocalStorage(); 
   }
 
   ngOnInit(): void {
     console.log('ngOnInit ejecutado');
-    this.form.get('text')?.valueChanges.subscribe(value => {
-      this.isButtonVisible = value && value.trim().length > 0;
-      console.log('Cambio en texto del formulario:', value);
-    });
+  }
+
+  getUserIdFromLocalStorage(): void {
+    this.userId = localStorage.getItem('userId');
+    if (!this.userId) {
+      console.error('El userId no está definido en localStorage.');
+    }
   }
 
   buildForm(): FormGroup {
@@ -38,96 +43,64 @@ export class CreatePostComponent {
     return this.formBuilder.group({
       text: ['', [Validators.required, Validators.minLength(2)]], // Campo de texto obligatorio
       tag: ['', Validators.required], // Campo de categoría obligatorio
-      media: ['', Validators.required], // Campo de archivo obligatorio (imagen/video)
+      media: [null, Validators.required], // Campo de archivo obligatorio (imagen/video)
     });
   }
 
-  chooseImage() {
-    console.log('Abrir selector de imagen');
-    const fileInputImage = document.getElementById('fileInputImage') as HTMLInputElement;
-    fileInputImage.click();
-  }
-
-  chooseVideo() {
-    console.log('Abrir selector de video');
-    const fileInputVideo = document.getElementById('fileInputVideo') as HTMLInputElement;
-    fileInputVideo.click();
-  }
-
-  getImageFile(event: Event) {
-    console.log('Seleccionando imagen');
+  getImageFile(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      console.log('Archivo seleccionado (imagen):', file.name);
-      const reader = new FileReader();
+    if (input.files && input.files.length > 0) {
+      const archivoCapturado = input.files[0];
+      console.log('Archivo capturado:', archivoCapturado); // Verifica el archivo capturado
+  
+      // Convertir a base64 para mostrar la vista previa de la imagen
+      this.extraerBase64(archivoCapturado).then((imagen: any) => {
+        this.imageSrc = imagen.base; // Mostrar vista previa
+      });
+  
+      // Limpiar el arreglo media antes de agregar un nuevo archivo
+      this.media = [];
+      this.media.push(archivoCapturado); // Agregar archivo al arreglo media
+      console.log('Media después de agregar archivo:', this.media);
 
-      if (file.type.startsWith('image/')) {
-        reader.onload = (e) => {
-          const result = e.target?.result;
-          console.log('Vista previa de imagen generada');
-          if (result) {
-            this.imageSrc = result;
-            this.videoSrc = null; // Limpiar video si seleccionamos imagen
-            this.form.get('media')?.setValue(file);
-          }
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Por favor, selecciona solo un archivo de imagen.');
-      }
+      this.form.patchValue({
+        media: archivoCapturado
+      });
     }
   }
+  
 
-  getVideoFile(event: Event) {
-    console.log('Seleccionando video');
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      console.log('Archivo seleccionado (video):', file.name);
-      const reader = new FileReader();
-
-      if (file.type.startsWith('video/')) {
-        reader.onload = (e) => {
-          const result = e.target?.result;
-          console.log('Vista previa de video generada');
-          if (result) {
-            this.videoSrc = result;
-            this.imageSrc = null; // Limpiar imagen si seleccionamos video
-            this.form.get('media')?.setValue(file);
-          }
+  extraerBase64 = async ($event: any) =>
+    new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+        reader.readAsDataURL($event);
+        reader.onload = () => {
+          resolve({
+            base: reader.result,
+          });
         };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Por favor, selecciona solo un archivo de video.');
+        reader.onerror = (error) => {
+          reject(error); // Aquí cambiamos resolve a reject para manejar el error correctamente
+        };
+      } catch (e) {
+        reject(e); // En lugar de devolver null, rechazamos la promesa con el error
       }
-    }
-  }
-
-  clearMedia() {
-    console.log('Limpiando archivo seleccionado');
-    this.imageSrc = null;
-    this.videoSrc = null;
-    this.form.get('media')?.setValue(null);
-  }
+    });
 
   onSubmit() {
+    console.log(this.form.value);
     if (this.form.invalid) {
       console.warn('El formulario no es válido:', this.form.errors);
       return;
     }
 
     const formData = new FormData();
-    const file = this.form.get('media')?.value;
-    const text = this.form.get('text')?.value;
-    const tag = this.form.get('tag')?.value;
-    const userId = this.authService.getUserId() || ''; // Obtener el ID del usuario logueado
 
-    if (file) {
-      formData.append('media', file);
-    }
-    formData.append('text', text);
-    formData.append('tag', tag);
+    formData.append('text', this.form.value.text);
+    formData.append('tag', this.form.value.tag);
 
     if (this.userId) {
       formData.append('userId', this.userId); // Usar el userId desde localStorage
@@ -136,11 +109,13 @@ export class CreatePostComponent {
       return;
     }
 
-    console.log('Formulario enviado con:', {
-      text,
-      tag,
-      userId,
-      fileName: file ? file.name : null,
+    console.log('datos para enviar',this.media)
+    const file = this.media[0];
+    
+    formData.append('media', file);
+
+    formData.forEach((value, key) => {
+      console.log(key, value); // Verifica los datos del FormData
     });
 
     this.postService.createPost(formData).subscribe(
