@@ -7,7 +7,6 @@ export interface UserModel {
     description?: string; // Campo opcional
     workingAt?: string; // Campo opcional
     avatar?: string; // Campo opcional
-    backgroundImage?: string; // Campo opcional
     userId?: string; // Campo opcional
   }
   
