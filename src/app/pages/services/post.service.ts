@@ -9,8 +9,8 @@ import { PostI } from "src/app/models/post.interface";
 export class PostService {
   private readonly httpClient = inject(HttpClient);
 
-  private readonly apiUrl: string = 'http://localhost:3009/posts'; // Cambiar URL si es necesario para historias
-  private readonly apiImg: string = 'http://localhost:3009'; 
+  private readonly apiUrl: string = 'http://localhost:3000/api/posts'; // Cambiar URL si es necesario para historias
+  private readonly apiImg: string = 'http://localhost:3000'; 
   constructor() {}
 
   // Obtener todas las historias
