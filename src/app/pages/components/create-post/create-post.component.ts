@@ -19,6 +19,7 @@ export class CreatePostComponent {
   imageSrc: string | ArrayBuffer | null = null; // Vista previa de la imagen
   videoSrc: string | ArrayBuffer | null = null; // Vista previa del video
   isButtonVisible: boolean = false; // Si el botón de publicación debe estar habilitado
+  isCategorySelected: boolean = false;
 
   constructor() {
     console.log('Constructor ejecutado: Inicializando componente');
@@ -55,6 +56,29 @@ export class CreatePostComponent {
     const fileInputVideo = document.getElementById('fileInputVideo') as HTMLInputElement;
     fileInputVideo.click();
   }
+
+  
+  chooseCategory(): void{
+    this.isCategorySelected = !this.isCategorySelected;
+  }
+
+  getCategory(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedCategory = selectElement.value;
+    
+    if (selectedCategory) {
+      this.isCategorySelected = true;  // Marca que se ha seleccionado una categoría
+      this.form.get('tag')?.setValue(selectedCategory);  // Establece el valor del formulario
+    } else {
+      alert('Por favor, selecciona una categoría.');
+    }
+  }
+
+  clearSelection() {
+    this.form.reset(); // Resetea todos los campos del formulario
+    this.isCategorySelected = false; // Oculta el formulario
+  }
+
 
   getImageFile(event: Event) {
     console.log('Seleccionando imagen');

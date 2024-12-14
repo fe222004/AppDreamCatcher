@@ -304,13 +304,75 @@
   position: absolute;
   left: 360px;
   bottom: 0;
-  /* Lo coloca en la parte inferior */
   z-index: 5;
 }
 
 .btn-post:hover {
   background-color: #0056b3;
 }
+
+
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Estilización del select */
+.select-wrapper select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 16px;
+  
+}
+
+/* Estilización del botón de cierre (X) para la tarjeta */
+.btn-close-card {
+  position: absolute;
+  top: -10px; /* Ajusta este valor para colocarlo más abajo */
+  right: 10px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10; /* Asegura que esté por encima de otros elementos */
+  transition: color 0.3s ease;
+}
+
+.btn-close-card:hover {
+  color: #555; /* Cambia de color al pasar el cursor */
+}
+
+.btn-submit {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.card {
+  padding: 20px;
+  position: relative; 
+  top: 25vh;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+
 
 /* Responsive*/
 @media (max-width: 600px) {
