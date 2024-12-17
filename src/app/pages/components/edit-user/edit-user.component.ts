@@ -36,10 +36,6 @@ private readonly dataTransferService: DataTransferServiceService = inject(
   public avatar: any[] = [];
   public avatarSrc: string | ArrayBuffer | null | undefined = null;
 
-  public image: any[] = [];
-  public imageSrc: string | ArrayBuffer | null | undefined = null;
-
-
 
   constructor(private route: ActivatedRoute,private translate: TranslateService,private modalService: ModalService,private sanitizer: DomSanitizer) {
     this.form = this.buildForm();
@@ -99,11 +95,7 @@ private readonly dataTransferService: DataTransferServiceService = inject(
       avatar: [
         null,
         [Validators.required], 
-      ],
-      backgroundImage: [
-        null, 
-        [Validators.required], 
-      ],
+      ]
     });
   }
 
@@ -125,24 +117,6 @@ private readonly dataTransferService: DataTransferServiceService = inject(
     }
   }
   
-
- getFileBackImage(event: Event): void {
-        // Asegurarse de que event.target no es null y es un HTMLInputElement
-        const input = event.target as HTMLInputElement;
-
-        if (input.files && input.files.length > 0) {
-          const archivoCapturado = input.files[0];
-      
-          // Convertir a base64 para mostrar en el preview
-          this.extraerBase64(archivoCapturado).then((imagen: any) => {
-            this.imageSrc = imagen.base; // Actualizar el preview del backgroundImage
-          });
-      
-          this.image = []; // Limpiar el arreglo de image para permitir solo un archivo
-          this.image.push(archivoCapturado); // Añadir el archivo actual al arreglo de image
-        } 
-  }
-
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
       const unsafeImg = window.URL.createObjectURL($event);
@@ -191,9 +165,6 @@ console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
 
     const file = this.avatar[0];
     formData.append('avatar', file);
-
-    const image = this.image[0];
-    formData.append('backgroundImage', image);
 
     formData.forEach((value, key) => {
       console.log(key, value); // Verifica los datos del FormData

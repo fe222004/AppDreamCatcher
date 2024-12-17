@@ -1,7 +1,13 @@
-<div *ngFor="let post of posts" class="post-item p-4 border-b border-gray-200">
+
+<div class="space-y-4">
+<div  *ngFor="let post of posts" class="bg-white p-6 rounded-xl border border-gray-200">
+<div  class="post-item p-4 border-b border-gray-200">
     <h3 class="text-lg font-bold">{{ post.text }}</h3>
     <p class="text-sm text-gray-600">Etiqueta: {{ post.tag }}</p>
     <div *ngIf="post.image" class="mt-4">
       <img [src]="post.image" alt="Imagen del post" class="rounded-md shadow-lg max-w-full h-auto" />
     </div>
-  </div>
+  </div>    
+</div>
+
+</div>

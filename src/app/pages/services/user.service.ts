@@ -9,7 +9,7 @@ import { UserModel } from 'src/app/models/userModel';
 export class UserService {
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl: string = 'http://localhost:3009/users/create'; // Cambiar URL si es necesario para historias
+  private readonly apiUrl: string = 'http://localhost:3000/api/users/create'; // Cambiar URL si es necesario para historias
 
 
 

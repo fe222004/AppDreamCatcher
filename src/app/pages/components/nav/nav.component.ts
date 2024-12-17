@@ -1,23 +1,33 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
+import { Component } from '@angular/core';
+import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent {
   isModalVisible: boolean = false;
   searchQuery: string = '';
   results: any[] = [];
   searchPerformed: boolean = false;
+  notification: any[] = [];
+  isNotificationsVisible = false;
+  selectedPost: any = null;
   private searchSubject: Subject<string> = new Subject<string>();
 
-  constructor(private searchService: searchService){
+  constructor(private searchService: searchService,  private postService: PostService,
+    private notificationService: NotificationService,
+    private router: Router){
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
       .subscribe((query) => this.performSearch(query));
+     this.fetchPosts();
   }
 
   openModal() {
@@ -67,7 +77,38 @@ export class NavComponent {
         console.error('Error al realizar la búsqueda:', err);
         this.results = [];
         this.searchPerformed = true;
+      },})}
+
+
+  fetchPosts(): void {
+    this.notificationService.getNotifications().subscribe(
+      (notification: any) => {
+        this.notification = notification.data;
+        console.log(notification);
       },
+      (error) => {
+        console.error('Error fetching notificacion:', error);
+      }
+    );
+  }
+
+  toggleNotifications() {
+    this.isNotificationsVisible = !this.isNotificationsVisible;
+  }
+
+  // Método para manejar el clic en la notificación
+  onNotificationClick(notificationId: string, postId: string): void {
+    // 1. Obtener el post basado en el ID del post
+    this.postService.findPostById(postId).subscribe((post) => {
+      this.selectedPost = post; // Guardar el post seleccionado
+      this.toggleNotifications(); // Cerrar el dropdown de notificaciones
+
+      // 2. Marcar la notificación como leída
+      this.notificationService
+        .updateNotificationStatus(notificationId)
+        .subscribe(() => {
+          console.log('Notificación actualizada.');
+        });
     });
   }
 }

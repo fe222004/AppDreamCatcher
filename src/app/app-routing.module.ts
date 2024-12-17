@@ -15,10 +15,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
   }, {
-    path: 'pages/:userId',
+    path: 'pages/',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
-      canActivate: [loginGuard],
+    //canActivate: [loginGuard],
+  },
+  {
+    path: ' home',
+    component: HomeComponent,
   },
   {
     path: '**',

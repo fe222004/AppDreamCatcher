@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/components/service/auth.service';
 import { PostService } from '../../services/post.service';
 import { PostI } from 'src/app/models/post.interface';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-create-post',
@@ -14,6 +15,8 @@ export class CreatePostComponent {
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
   private readonly postService: PostService = inject(PostService);
   private readonly authService: AuthService = inject(AuthService);
+  private readonly notificationService: NotificationService = inject(NotificationService);
+
 
   public userId: string | null = null; // Cambiado para obtener el ID desde localStorage
   form: FormGroup; // Formulario para capturar el contenido del post
@@ -120,11 +123,34 @@ export class CreatePostComponent {
 
     this.postService.createPost(formData).subscribe(
       (response: PostI) => {
-        console.log('Post creado exitosamente:', response);
+        console.log('Post creado exitosamente. Respuesta del servidor:', response);
+  
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const fullName = user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'Usuario desconocido';
+  
+        const notification = {
+          description: `Nuevo post creado: ${this.form.value.text}`,
+          username: fullName,
+          tag: this.form.value.tag,
+          postId: response?.id || null, // Asegurar que `response.id` exista
+          status: false, // Notificación no leída
+        };
+  
+        console.log('Notificación preparada para enviar:', notification);
+  
+        this.notificationService.createNotification(notification).subscribe(
+          () => {
+            console.log('Notificación enviada correctamente.');
+          },
+          (error) => {
+            console.error('Error al enviar la notificación:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error al crear el post:', error);
       }
     );
-  }
+
+}
 }
