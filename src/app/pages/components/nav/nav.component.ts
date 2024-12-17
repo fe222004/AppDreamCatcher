@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
-import { Component } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
@@ -21,13 +20,16 @@ export class NavComponent {
   selectedPost: any = null;
   private searchSubject: Subject<string> = new Subject<string>();
 
-  constructor(private searchService: searchService,  private postService: PostService,
+  constructor(
+    private searchService: searchService,
+    private postService: PostService,
     private notificationService: NotificationService,
-    private router: Router){
+    private router: Router
+  ) {
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
       .subscribe((query) => this.performSearch(query));
-     this.fetchPosts();
+    this.fetchPosts();
   }
 
   openModal() {
@@ -77,8 +79,9 @@ export class NavComponent {
         console.error('Error al realizar la búsqueda:', err);
         this.results = [];
         this.searchPerformed = true;
-      },})}
-
+      },
+    });
+  }
 
   fetchPosts(): void {
     this.notificationService.getNotifications().subscribe(
