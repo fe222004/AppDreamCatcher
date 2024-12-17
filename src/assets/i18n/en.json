@@ -89,5 +89,8 @@
     "success_title": "Registration Successful!",
     "success_message": "Your account has been created successfully. Welcome!",
     "accept_button": "Accept"
+  },
+  "navbar":{
+    "search": "Search..."
   }
 }
