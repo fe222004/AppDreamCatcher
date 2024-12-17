@@ -18,7 +18,11 @@ const routes: Routes = [
     path: 'pages/',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
-    canActivate: [loginGuard],
+    //canActivate: [loginGuard],
+  },
+  {
+    path: ' home',
+    component: HomeComponent,
   },
   {
     path: '**',

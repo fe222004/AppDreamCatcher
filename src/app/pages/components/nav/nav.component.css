@@ -1,0 +1,89 @@
+/* Estilos para el navbar */
+    .navbar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Formulario de búsqueda */
+  .search-form {
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    margin-left: 100px;
+  }
+  
+  .search-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Modal de búsqueda (dropdown) */
+  .dropdown-modal {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 45px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    position: absolute;
+    padding: 15px;
+  }
+
+  .dropdown-modal .results-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Lista de resultados */
+  .result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  white-space: nowrap; 
+}
+
+.user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Keeps the name on one line */
+}
+
+.content-post {
+  flex-grow: 2;
+  word-wrap: break-word;
+  margin-right: 15px;
+  margin-left: 25px;
+}
+
+
+.etiqueta {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+  
+.result-item:hover {
+    background-color: #f1f1f1;
+}
+  
+  
+  

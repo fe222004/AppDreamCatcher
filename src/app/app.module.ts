@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './components/auth/auth.module';
 import { AppComponent } from './app.component';
+import { PagesModule } from './pages/pages.module';
 
 
 
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     HttpClientModule, 
     RouterModule,
+    PagesModule,
     AuthModule,
     ReactiveFormsModule,
     BrowserModule,

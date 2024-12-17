@@ -82,6 +82,9 @@
     "fields_incomplete_title": "Completa todos los campos",
     "fields_incomplete_message": "Por favor, asegúrate de llenar todos los campos requeridos antes de continuar.",
     "accept_button": "Aceptar"
+  },
+  "navbar":{
+    "search": "Buscar..."
   }
 }
 
