@@ -39,6 +39,20 @@ export class PostService {
     );
   }
 
+  findPostById(id: string): Observable<PostI> {
+    return this.httpClient.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map((post) => ({
+        id: post.id || undefined,
+        text: post.text || undefined,
+        tag: post.tag || undefined,
+        userId: post.userId || undefined,
+        image: post.media
+          ? `${this.apiImg}/uploads/posts/${post.media}`
+          : undefined, // Cambio aquí a 'media'
+      }))
+    );
+  }
+
   // Actualizar una historia existente por ID
   updatePost(id: string, payload: FormData): Observable<PostI> {
     console.log('Enviando solicitud para actualizar post con ID:', id, 'y payload:', payload);

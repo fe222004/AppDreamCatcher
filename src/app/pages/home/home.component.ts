@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalService } from '../services/modal.service';
+import { NavModule } from "../components/nav/nav.module";
+import { NavComponent } from "../components/nav/nav.component";
 
 @Component({
   selector: 'app-home',  // El selector debe ser correcto
