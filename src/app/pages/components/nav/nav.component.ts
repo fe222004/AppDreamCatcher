@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -13,8 +14,9 @@ export class NavComponent {
   results: any[] = [];
   searchPerformed: boolean = false;
   private searchSubject: Subject<string> = new Subject<string>();
+  userId: any;
 
-  constructor(private searchService: searchService){
+  constructor(private searchService: searchService, private router: Router){
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
       .subscribe((query) => this.performSearch(query));
@@ -62,6 +64,7 @@ export class NavComponent {
       next: (data) => {
         this.results = data; // Asigna los resultados obtenidos
         this.searchPerformed = true;
+        console.log(this.results)
       },
       error: (err) => {
         console.error('Error al realizar la búsqueda:', err);
@@ -69,5 +72,10 @@ export class NavComponent {
         this.searchPerformed = true;
       },
     });
+  }
+
+  goToPostDetail(id:string): void {
+    const userId = this.userId;
+    this.router.navigate([`/pages/${userId}/detail/${id}`]);
   }
 }

@@ -1,0 +1,10 @@
+<div *ngIf="results" class="post-detail">
+    <img [src]="results.user.avatar" alt="Avatar" class="user-photo" />
+    <h2>{{ results.user.firstname }} {{ results.user.lastname }}</h2>
+    <p>{{ results.text }}</p>
+    <small>#{{ results.tag }}</small>
+  </div>
+  
+  <div *ngIf="!results">
+    <p>El post no existe o hubo un error al cargarlo.</p>
+  </div>
