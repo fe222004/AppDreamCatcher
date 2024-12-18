@@ -1,36 +1,37 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<!-- Formulario para los inputs del post -->
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <!-- Contenedor para los inputs de texto y etiqueta -->
   <div class="input-group mb-3 flex items-center">
-    <!-- Imagen de perfil a la izquierda -->
-    <img class="rounded-circle profile-image mr-4" 
-         src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" 
-         alt="Profile Image" />
-  
-    <!-- Contenedor para los inputs del post (texto y etiqueta) -->
+    <img class="rounded-circle profile-image mr-4"
+      src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image" />
     <div class="inputs-container">
       <!-- Input para el texto del post -->
-      <input type="text" class="form-control post-input mb-2" formControlName="text" placeholder="¿Qué estás pensando?" />
-  
-      <!-- Input para la etiqueta del post (ej. música, deporte, etc) -->
-      <input type="text" class="form-control post-input" formControlName="tag" placeholder="Etiqueta (Música, Deporte, etc)" />
+      <input type="text" class="form-control post-input mb-2" formControlName="text"
+        placeholder="¿Qué estás pensando?" />
+      <!-- Select para la etiqueta del post -->
+      <select class="form-control post-input post-select" formControlName="tag">
+        <option value="" disabled selected>Etiqueta</option>
+        <option value="amigos">Amigos</option>
+        <option value="familia">Familia</option>
+        <option value="comida">Comida</option>
+        <option value="trabajo">Trabajo</option>
+        <option value="trabajo">Deporte</option>
+        <option value="trabajo">Música</option>
+      </select>
     </div>
   </div>
-
-  <!-- Sección para previsualizar y seleccionar imagen -->
+  <div class="separator"></div>
   <div class="input-group mb-3 image-container">
     <div class="relative">
-      <!-- Contenedor cuadrado, fondo transparente y sin borde -->
       <div class="image-box" [ngClass]="{'image-selected': imageSrc}">
         <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
         <label for="media" class="cursor-pointer w-full h-full flex items-center justify-center">
           <i *ngIf="!imageSrc" class="fas fa-image text-gray-500"></i>
           <img *ngIf="imageSrc" [src]="imageSrc" alt="Imagen seleccionada" class="w-full h-full object-cover" />
         </label>
-        <button type="button" class="btn-circle btn-danger" *ngIf="imageSrc" (click)="clearMedia()">
-          <i class="fas fa-times"></i>
+        <button type="button" class="btn-circle btn-danger btn-tooltip" *ngIf="imageSrc" (click)="clearMedia()">
+          <i class="bi bi-x-lg" style="color: #dfdfdf"></i>
+          <span class="tooltip-eliminar">Eliminar</span>
         </button>
       </div>
     </div>
@@ -39,5 +40,3 @@
   <!-- Botón de publicar, visible siempre -->
   <button type="submit" class="btn btn-custom-primary">Publicar</button>
 </form>
-
-<!--Modificar la x y poner texto, hacer el select y poner validaciones-->
