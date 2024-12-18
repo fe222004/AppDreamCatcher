@@ -1,8 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
+
 import { NotificationService } from '../../services/notification.service';
+
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 import { PostService } from '../../services/post.service';
 import { LanguageConstants } from 'src/app/constants/language-constants';
 import { TranslationService } from '../../services/translation.service';
@@ -22,9 +25,12 @@ export class NavComponent {
   isNotificationsVisible = false;
   selectedPost: any = null;
   private searchSubject: Subject<string> = new Subject<string>();
+
+  userId: any;
   showMenuI: boolean = false;
   currentLanguage: 'en' | 'es' = 'es';
   languages = LanguageConstants;
+
 
   constructor(
     private searchService: searchService,
@@ -105,6 +111,7 @@ export class NavComponent {
       next: (data) => {
         this.results = data; // Asigna los resultados obtenidos
         this.searchPerformed = true;
+        console.log(this.results)
       },
       error: (err) => {
         console.error('Error al realizar la búsqueda:', err);
@@ -144,5 +151,10 @@ export class NavComponent {
           console.log('Notificación actualizada.');
         });
     });
+  }
+
+  goToPostDetail(id:string): void {
+    const userId = this.userId;
+    this.router.navigate([`/pages/${userId}/detail/${id}`]);
   }
 }

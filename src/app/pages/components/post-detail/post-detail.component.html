@@ -1,0 +1,80 @@
+<body class="bg-gray-200">
+  <!-- Fondo gris para toda la página -->
+  <main>
+    <!-- Header -->
+    <div class="bg-white shadow-md">
+      <app-nav></app-nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-4">
+      <!-- Layout Responsivo -->
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sección izquierda (perfil del usuario) -->
+        <section
+          class="left-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full"
+        >
+          <!-- Contenido de la sección izquierda -->
+          <app-profile></app-profile>
+        </section>
+
+        <!-- Tarjeta detalles post -->
+        <div *ngIf="results"
+          class="post-card bg-white p-6 rounded-xl shadow-lg w-full lg:w-3/4 max-w-full"
+        >
+          <!-- Imagen del Post -->
+          <div class="post-image">
+            <img [src]="results.user.media" alt="Post Image" />
+          </div>
+
+          <!-- Contenido del Post -->
+          <div class="post-content">
+            <!-- Header del Post -->
+            <div class="post-header">
+              <img
+              [src]="results.user.avatar"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <span class="username">{{ results.user.firstname }} {{ results.user.lastname }}</span>
+                <span class="time">Hace 2 horas</span>
+              </div>
+              <div class="options">⋮</div>
+            </div>
+            <div class="caption">
+              <div class="tag">
+                <strong>Etiqueta:</strong> {{ results.tag }}
+              </div>
+              <div class="detail">
+                <strong>Descripcion</strong> {{ results.text }}
+              </div>
+            </div>
+
+            <!-- Footer del Post -->
+            <div class="post-footer">
+              <!-- Acciones del Post -->
+              <div class="actions">
+                <span class="icon">❤️</span>
+                <span class="icon">💬</span>
+                <span class="icon">📤</span>
+              </div>
+
+              <!-- Información adicional -->
+              <div class="likes">Liked by 590 people</div>
+
+              <!-- Comentarios -->
+              <div class="comment-section">
+                <input
+                  type="text"
+                  class="comment-input"
+                  placeholder="Add a comment..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>

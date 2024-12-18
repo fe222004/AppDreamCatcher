@@ -168,4 +168,9 @@ export class EditUserComponent {
   closeModal() {
     this.modalService.hideModal();
   }
+
+  navigateHome() {
+    const userId = this.userId;
+    this.router.navigate([`/pages/${userId}/home`]);
+  }
 }

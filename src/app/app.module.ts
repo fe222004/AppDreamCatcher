@@ -10,9 +10,9 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './components/auth/auth.module';
+import { CreatePostComponent } from './pages/components/create-post/create-post.component';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
-
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -21,7 +21,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule, 

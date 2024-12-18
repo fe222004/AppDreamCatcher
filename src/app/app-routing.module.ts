@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { loginGuard } from './components/guards/login.guard';
+import { PostDetailComponent } from './pages/components/post-detail/post-detail.component';
 
 const routes: Routes = [
   {
@@ -15,19 +16,19 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
   }, {
-    path: 'pages/',
+    path: 'pages/:userId',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
-    //canActivate: [loginGuard],
+    canActivate: [loginGuard],
   },
-  {
-    path: ' home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: ' home',
+  //   component: HomeComponent,
+  // },
   {
     path: '**',
     redirectTo: '',
-  },
+  }
 ];
 
 @NgModule({

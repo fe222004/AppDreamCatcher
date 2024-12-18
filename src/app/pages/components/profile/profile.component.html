@@ -8,13 +8,13 @@
             <p class="description">
               {{ user.description }}
             </p>
-            <button type="button" class="btn btn-outline-success" style="font-size: 17px; border: none;" (click)="openModal()">Editar Perfil</button>
-            <button type="button" class="btn btn-outline-danger" style="font-size: 17px; border: none;">Eliminar Perfil</button>
+            <button type="button" class="btn btn-outline-success" style="font-size: 17px; border: none; margin-top: 20px;" (click)="openModal()">{{ 'profile.edit' | translate }}</button>
           </div>
           <div class="extra-info">
             <h4>{{ 'profile4.information' | translate }}</h4>
             <p>🏠 {{ livingIn }}</p>
             <p>❤️ {{ maritalStatus }}</p>
             <p>💼{{ workingAt }}</p>
+
           </div>
         </div>
