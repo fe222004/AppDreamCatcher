@@ -4,6 +4,8 @@ import { debounceTime, Subject } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
+import { LanguageConstants } from 'src/app/constants/language-constants';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-nav',
@@ -19,17 +21,40 @@ export class NavComponent {
   isNotificationsVisible = false;
   selectedPost: any = null;
   private searchSubject: Subject<string> = new Subject<string>();
+  showMenuI: boolean = false;
+  currentLanguage: 'en' | 'es' = 'es';
+  languages = LanguageConstants;
 
   constructor(
     private searchService: searchService,
     private postService: PostService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService
   ) {
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
       .subscribe((query) => this.performSearch(query));
     this.fetchPosts();
+  }
+
+  toggleMenuI(): void {
+    this.showMenuI = !this.showMenuI;
+  }
+
+  closeMenu(): void {
+    this.showMenuI = false;
+  }
+
+  changeLanguage(language: 'en' | 'es', event: Event): void {
+    event.preventDefault();
+    this.translationService.setLanguage(language);
+    this.currentLanguage = language;
+    this.closeMenu();
+  }
+
+  getFlagUrl(language: 'en' | 'es'): string {
+    return LanguageConstants[language];
   }
 
   openModal() {
