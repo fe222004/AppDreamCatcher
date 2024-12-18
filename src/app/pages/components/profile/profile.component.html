@@ -3,23 +3,18 @@
             <img src="https://i.pinimg.com/736x/91/f0/b6/91f0b61eb390a50700dc4327eae91244.jpg" alt="Foto de Portada">
           </div>
           <div class="profile-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwHf5299P7Ub9mEF3y-KBKsF-kwSRJQUKcyQ&s" alt="Foto de Perfil" class="profile-photo">
-            <h3 class="name">Joss Balarezo</h3>
-            <p class="username">jossbalarezo21</p>
-            <div class="stats">
-              <span><strong>2022</strong>{{ 'profile.followers' | translate }}</span>
-              <span><strong>590</strong>{{ 'profile.following' | translate }}</span>
-              <span><strong>30</strong> {{ 'profile.post' | translate }}</span>
-            </div>
+            <img [src]="profileImage" alt="Foto de Perfil" class="profile-photo">
+    <h3 class="name">{{ fullName }}</h3>
             <p class="description">
-              {{ 'profile.description' | translate }}
+              {{ user.description }}
             </p>
             <button type="button" class="btn btn-outline-success" style="font-size: 17px; border: none; margin-top: 20px;" (click)="openModal()">{{ 'profile.edit' | translate }}</button>
           </div>
           <div class="extra-info">
-            <h4>{{ 'profile.information' | translate }}</h4>
-            <p>🏠 {{ 'profile.city' | translate }}</p>
-            <p>❤️ {{ 'profile.status' | translate }}</p>
-            <p>💼 {{ 'profile.profession' | translate }}</p>
+            <h4>{{ 'profile4.information' | translate }}</h4>
+            <p>🏠 {{ livingIn }}</p>
+            <p>❤️ {{ maritalStatus }}</p>
+            <p>💼{{ workingAt }}</p>
+
           </div>
         </div>
