@@ -1,9 +1,15 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
+
+import { NotificationService } from '../../services/notification.service';
+
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { PostService } from '../../services/post.service';
+import { LanguageConstants } from 'src/app/constants/language-constants';
+import { TranslationService } from '../../services/translation.service';
+import { AuthService } from 'src/app/components/service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -19,16 +25,44 @@ export class NavComponent {
   isNotificationsVisible = false;
   selectedPost: any = null;
   private searchSubject: Subject<string> = new Subject<string>();
+
   userId: any;
+  showMenuI: boolean = false;
+  currentLanguage: 'en' | 'es' = 'es';
+  languages = LanguageConstants;
 
 
-  constructor(private searchService: searchService,  private postService: PostService,
+  constructor(
+    private searchService: searchService,
+    private postService: PostService,
     private notificationService: NotificationService,
-    private router: Router){
+    private router: Router,
+    private translationService: TranslationService,
+    private authService: AuthService
+  ) {
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
       .subscribe((query) => this.performSearch(query));
-     this.fetchPosts();
+    this.fetchPosts();
+  }
+
+  toggleMenuI(): void {
+    this.showMenuI = !this.showMenuI;
+  }
+
+  closeMenu(): void {
+    this.showMenuI = false;
+  }
+
+  changeLanguage(language: 'en' | 'es', event: Event): void {
+    event.preventDefault();
+    this.translationService.setLanguage(language);
+    this.currentLanguage = language;
+    this.closeMenu();
+  }
+
+  getFlagUrl(language: 'en' | 'es'): string {
+    return LanguageConstants[language];
   }
 
   openModal() {
@@ -37,6 +71,10 @@ export class NavComponent {
 
   closeModal() {
     this.isModalVisible = false; // Cierra el modal
+  }
+
+  logout() {
+    this.authService.logout(); 
   }
 
   @HostListener('document:click', ['$event'])
@@ -79,8 +117,9 @@ export class NavComponent {
         console.error('Error al realizar la búsqueda:', err);
         this.results = [];
         this.searchPerformed = true;
-      },})}
-
+      },
+    });
+  }
 
   fetchPosts(): void {
     this.notificationService.getNotifications().subscribe(
