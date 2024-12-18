@@ -22,6 +22,11 @@ const routes: Routes = [
     canActivate: [loginGuard],
   },
   {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+
     path: '**',
     redirectTo: '',
   }
