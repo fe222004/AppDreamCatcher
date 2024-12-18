@@ -130,7 +130,11 @@
     <div class="relative w-8 h-8 rounded-full overflow-hidden">
       <img src="https://www.w3schools.com/w3images/avatar2.png" alt="User" class="w-full h-full object-cover" />
     </div>
-    <a href="#" class="text-sm/6 font-semibold text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+
+
+    <button  (click)="logout()" class="text-sm/6 font-semibold text-gray-900"
+      >Log in <span aria-hidden="true">&rarr;</span></button
+    >
   </div>
 
   <div *ngIf="selectedPost" class="fixed inset-0 flex items-center justify-center bg-gray-500/75">

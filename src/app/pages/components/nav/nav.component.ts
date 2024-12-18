@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { LanguageConstants } from 'src/app/constants/language-constants';
 import { TranslationService } from '../../services/translation.service';
+import { AuthService } from 'src/app/components/service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -30,7 +31,8 @@ export class NavComponent {
     private postService: PostService,
     private notificationService: NotificationService,
     private router: Router,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private authService: AuthService
   ) {
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
@@ -63,6 +65,10 @@ export class NavComponent {
 
   closeModal() {
     this.isModalVisible = false; // Cierra el modal
+  }
+
+  logout() {
+    this.authService.logout(); 
   }
 
   @HostListener('document:click', ['$event'])
