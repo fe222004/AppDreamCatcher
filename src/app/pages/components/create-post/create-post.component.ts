@@ -29,6 +29,7 @@ export class CreatePostComponent {
     this.form = this.buildForm();
     this.getUserIdFromLocalStorage(); 
   }
+  
 
   ngOnInit(): void {
     console.log('ngOnInit ejecutado');
