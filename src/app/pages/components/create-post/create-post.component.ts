@@ -71,6 +71,16 @@ export class CreatePostComponent {
       });
     }
   }
+
+  clearMedia(): void {
+  this.imageSrc = null; // Limpiar la vista previa de la imagen
+  this.media = []; // Limpiar el arreglo media
+  this.form.patchValue({
+    media: null // Limpiar el campo de formulario relacionado con la imagen
+  });
+  console.log('Imagen eliminada');
+}
+
   
 
   extraerBase64 = async ($event: any) =>
