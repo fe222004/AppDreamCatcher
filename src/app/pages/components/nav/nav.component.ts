@@ -1,9 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { searchService } from '../../services/search.service';
 import { debounceTime, Subject } from 'rxjs';
-
-import { NotificationService } from '../../services/notification.service';
-
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { PostService } from '../../services/post.service';
