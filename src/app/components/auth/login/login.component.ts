@@ -77,8 +77,6 @@ getFlagUrl(language: 'en' | 'es'): string {
       this.authService.login(email, password).subscribe(
         (response) => {
           localStorage.setItem('token', response.accessToken);
-          localStorage.setItem('userName', response.user.first_name);
-          localStorage.setItem('userLastName', response.user.last_name);
           localStorage.setItem('userId', response.user.id.toString());
           if (response.user) {
             localStorage.setItem('user', JSON.stringify(response.user));

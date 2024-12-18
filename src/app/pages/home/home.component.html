@@ -3,7 +3,7 @@
   <main>
     <!-- Header -->
     <div class="bg-white shadow-md">
-      <app-nav></app-nav>
+     <app-nav></app-nav>
     </div>
 
     <!-- Main Content -->
@@ -11,10 +11,12 @@
       <!-- Layout Responsivo -->
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sección izquierda (perfil del usuario) -->
-        <section class="left-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full">
+        <section class="left-section bg-white p-6 rounded-xl shadow-lg w-full lg:w-1/4 max-w-full h-[500px]">
           <!-- Contenido de la sección izquierda -->
           <app-profile></app-profile>
         </section>
+        
+        
 
         <section *ngIf="modalVisible"
           class="center-section p-6 rounded-xl w-full lg:w-1/2 max-w-full overflow-y-auto h-screen">
@@ -28,18 +30,14 @@
           <!-- Tarjetas dentro de la sección central -->
           <div class="space-y-8 mt-6">
             <!-- Tarjeta 1 -->
-            <div class="bg-white p-6 rounded-xl border border-gray-200">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6">
               <app-create-post></app-create-post>
             </div>
-
-                 <!-- Tarjeta 3 -->
-                 <div class="bg-white p-6 rounded-xl border border-gray-200">
-                  <h3 class="text-xl font-semibold text-gray-800">Tarjeta 3</h3>
-                  <p class="text-gray-600 mt-2">Contenido de la tarjeta 3.</p>
-                </div>
-
-            <!-- Tarjeta 2 -->
+            
+            <div class=" p-6 rounded-xl border border-gray-200 mb-6">
               <app-post></app-post>
+            </div>
+            
 
           </div>
         </section>
