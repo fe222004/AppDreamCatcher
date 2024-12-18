@@ -16,15 +16,14 @@ export class PostDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse a los cambios de los parámetros de la ruta
     this.route.paramMap.subscribe((params) => {
       const postId = params.get('id');
-      console.log('Post id', postId);  // Obtiene el ID de la URL
+      console.log('Post id', postId);
       if (postId) {
         this.searchService.getPostById(postId).subscribe({
           next: (data) => {
             this.results = data;
-            console.log('Detalles del post:', this.results); // Muestra los datos obtenidos
+            console.log('Detalles del post:', this.results); 
           },
           error: (err) => console.error('Error al obtener el post:', err),
         });

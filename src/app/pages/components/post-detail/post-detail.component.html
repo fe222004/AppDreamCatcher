@@ -24,7 +24,7 @@
         >
           <!-- Imagen del Post -->
           <div class="post-image">
-            <img [src]="results.user.avatar" alt="Post Image" />
+            <img [src]="results.user.media" alt="Post Image" />
           </div>
 
           <!-- Contenido del Post -->
@@ -32,7 +32,7 @@
             <!-- Header del Post -->
             <div class="post-header">
               <img
-                src="https://via.placeholder.com/40"
+              [src]="results.user.avatar"
                 alt="Avatar"
                 class="avatar"
               />

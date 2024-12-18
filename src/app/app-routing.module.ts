@@ -16,22 +16,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
   }, {
-    path: 'pages/',
+    path: 'pages/:userId',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
-    //canActivate: [loginGuard],
+    canActivate: [loginGuard],
   },
-  {
-    path: ' home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: ' home',
+  //   component: HomeComponent,
+  // },
   {
     path: '**',
     redirectTo: '',
-  },
-  {
-    path: 'detail/:postId',
-    component: PostDetailComponent,
   }
 ];
 

@@ -7,20 +7,19 @@
             <h3 class="name">Joss Balarezo</h3>
             <p class="username">jossbalarezo21</p>
             <div class="stats">
-              <span><strong>2022</strong>{{ 'profile1.followers' | translate }}</span>
-              <span><strong>590</strong>{{ 'profile2.following' | translate }}</span>
-              <span><strong>30</strong> {{ 'profile3.post' | translate }}</span>
+              <span><strong>2022</strong>{{ 'profile.followers' | translate }}</span>
+              <span><strong>590</strong>{{ 'profile.following' | translate }}</span>
+              <span><strong>30</strong> {{ 'profile.post' | translate }}</span>
             </div>
             <p class="description">
               {{ 'profile.description' | translate }}
             </p>
-            <button type="button" class="btn btn-outline-success" style="font-size: 17px; border: none;" (click)="openModal()">Editar Perfil</button>
-            <button type="button" class="btn btn-outline-danger" style="font-size: 17px; border: none;">Eliminar Perfil</button>
+            <button type="button" class="btn btn-outline-success" style="font-size: 17px; border: none; margin-top: 20px;" (click)="openModal()">{{ 'profile.edit' | translate }}</button>
           </div>
           <div class="extra-info">
-            <h4>{{ 'profile4.information' | translate }}</h4>
-            <p>🏠 {{ 'profile5.city' | translate }}</p>
-            <p>❤️ {{ 'profile6.status' | translate }}</p>
-            <p>💼 {{ 'profile7.profession' | translate }}</p>
+            <h4>{{ 'profile.information' | translate }}</h4>
+            <p>🏠 {{ 'profile.city' | translate }}</p>
+            <p>❤️ {{ 'profile.status' | translate }}</p>
+            <p>💼 {{ 'profile.profession' | translate }}</p>
           </div>
         </div>

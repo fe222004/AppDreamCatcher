@@ -189,4 +189,9 @@ console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
   closeModal() {
     this.modalService.hideModal();
   }
+
+  navigateHome() {
+    const userId = this.userId;
+    this.router.navigate([`/pages/${userId}/home`]);
+  }
 }

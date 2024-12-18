@@ -43,35 +43,20 @@
     "preferred_contact_method_required": "El método de contacto preferido es requerido.",
     "submit_button": "Registro"
   },
-  "nav": {
-    "search": "Buscar"
-  },
   "profile": {
-    "description": "“No podemos resolver nuestros problemas con el mismo pensamiento que usamos cuando los creamos”. - Albert Einstein"
+    "description": "No podemos resolver nuestros problemas con el mismo pensamiento que utilizamos cuando los creamos. -Alberto Einstein",
+    "followers": "Seguidores",
+    "following": "Seguidos",
+    "post": "Publicaciones",
+    "information": "Detalles:",
+    "city": "Vive en Quito",
+    "status": "Soltera",
+    "profession": "Desarrollador de Software",
+    "edit": "Editar Perfil"
   },
-  "profile1": {
-    "followers": "Seguidores"
-  },
-  "profile2": {
-    "following": "Seguidos"
-  },
-  "profile3": {
-    "post": "Publicaciones"
-  },
-  "profile4": {
-    "information": "Detalles:"
-  },
-  "profile5": {
-    "city": "Vive en Quito"
-  },
-  "profile6": {
-    "status": "Soltera"
-  },
-  "profile7": {
-    "profession": "Desarrollador de Software"
-  },
-  "nav1": {
-    "logout": "Salir"
+  "nav": {
+    "logout": "Salir",
+    "search": "Buscar..."
   },
   "alert": {
     "success_title": "¡Registro Exitoso!",
@@ -82,9 +67,6 @@
     "fields_incomplete_title": "Completa todos los campos",
     "fields_incomplete_message": "Por favor, asegúrate de llenar todos los campos requeridos antes de continuar.",
     "accept_button": "Aceptar"
-  },
-  "navbar":{
-    "search": "Buscar..."
   }
 }
 
