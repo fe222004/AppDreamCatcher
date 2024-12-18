@@ -1,17 +1,5 @@
 <div class="relative min-h-screen flex items-center justify-center bg-gray-50">
     <div class="relative w-full max-w-5xl bg-white rounded-lg shadow-md overflow-hidden">
-        <!-- Background Image -->
-        <div class="relative h-48 bg-gray-300">
-
-            <label for="background"
-                class="absolute inset-0 flex items-center justify-center cursor-pointer text-sm text-gray-600">
-                <input type="file" id="background" class="hidden" (change)="getFileBackImage($event)" />
-                <span *ngIf="!imageSrc" for="background" class="bg-white py-1 px-3 rounded shadow-md">Upload Background</span>
-                <img *ngIf="imageSrc" [src]="imageSrc" alt="Background"
-                    class="object-cover w-full h-full rounded-t-lg shadow-md" />
-            </label>
-
-        </div>
 
         <!-- Avatar -->
         <div class="relative -mt-16 flex justify-center">
