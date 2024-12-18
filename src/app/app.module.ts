@@ -5,17 +5,15 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
-import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './pages/home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginModule } from './components/auth/login/login.module';
-import { RegisterModule } from './components/auth/register/register.module';
 import { AuthModule } from './components/auth/auth.module';
 import { CreatePostComponent } from './pages/components/create-post/create-post.component';
-import { PostComponent } from './pages/components/post/post.component';
+import { AppComponent } from './app.component';
+import { PagesModule } from './pages/pages.module';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -23,11 +21,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule, 
     RouterModule,
+    PagesModule,
     AuthModule,
     ReactiveFormsModule,
     BrowserModule,

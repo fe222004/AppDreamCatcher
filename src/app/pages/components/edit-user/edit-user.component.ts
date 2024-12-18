@@ -13,10 +13,10 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent {
-private readonly dataTransferService: DataTransferServiceService = inject(
+  private readonly dataTransferService: DataTransferServiceService = inject(
     DataTransferServiceService
   );
   private formBuilder = inject(FormBuilder);
@@ -36,14 +36,14 @@ private readonly dataTransferService: DataTransferServiceService = inject(
   public avatar: any[] = [];
   public avatarSrc: string | ArrayBuffer | null | undefined = null;
 
-  public image: any[] = [];
-  public imageSrc: string | ArrayBuffer | null | undefined = null;
-
-
-
-  constructor(private route: ActivatedRoute,private translate: TranslateService,private modalService: ModalService,private sanitizer: DomSanitizer) {
+  constructor(
+    private route: ActivatedRoute,
+    private translate: TranslateService,
+    private modalService: ModalService,
+    private sanitizer: DomSanitizer
+  ) {
     this.form = this.buildForm();
-    this.getUserIdFromLocalStorage(); 
+    this.getUserIdFromLocalStorage();
     this.kitchenImage = ImageConstants.kitchen;
     this.kitchenImageTwo = ImageConstants.kitchenTwo;
   }
@@ -54,7 +54,6 @@ private readonly dataTransferService: DataTransferServiceService = inject(
       console.error('El userId no está definido en localStorage.');
     }
   }
-
 
   buildForm(): FormGroup {
     return this.formBuilder.group({
@@ -74,103 +73,57 @@ private readonly dataTransferService: DataTransferServiceService = inject(
           Validators.maxLength(ValidationConstants.NAME_MAX_LENGTH),
         ],
       ],
-      description: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
-      livesIn: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
-      status: [
-        '',
-        [Validators.required],
-      ],
-      worksAt: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
-      avatar: [
-        null,
-        [Validators.required], 
-      ],
-      backgroundImage: [
-        null, 
-        [Validators.required], 
-      ],
+      description: ['', [Validators.required]],
+      livesIn: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      worksAt: ['', [Validators.required]],
+      avatar: [null, [Validators.required]],
     });
   }
 
   getFileAvatar(event: Event): void {
-    console.log(event)
+    console.log(event);
     // Asegurarse de que event.target no es null y es un HTMLInputElement
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files.length > 0) {
       const archivoCapturado = input.files[0];
-  
+
       // Convertir a base64 para mostrar en el preview
       this.extraerBase64(archivoCapturado).then((imagen: any) => {
         this.avatarSrc = imagen.base; // Actualizar el preview del avatar
       });
-  
+
       this.avatar = []; // Limpiar el arreglo de avatar para permitir solo un archivo
       this.avatar.push(archivoCapturado); // Añadir el archivo actual al arreglo de avatar
     }
   }
-  
 
- getFileBackImage(event: Event): void {
-        // Asegurarse de que event.target no es null y es un HTMLInputElement
-        const input = event.target as HTMLInputElement;
-
-        if (input.files && input.files.length > 0) {
-          const archivoCapturado = input.files[0];
-      
-          // Convertir a base64 para mostrar en el preview
-          this.extraerBase64(archivoCapturado).then((imagen: any) => {
-            this.imageSrc = imagen.base; // Actualizar el preview del backgroundImage
+  extraerBase64 = async ($event: any) =>
+    new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+        reader.readAsDataURL($event);
+        reader.onload = () => {
+          resolve({
+            base: reader.result,
           });
-      
-          this.image = []; // Limpiar el arreglo de image para permitir solo un archivo
-          this.image.push(archivoCapturado); // Añadir el archivo actual al arreglo de image
-        } 
-  }
+        };
+        reader.onerror = (error) => {
+          reject(error); // Aquí cambiamos resolve a reject para manejar el error correctamente
+        };
+      } catch (e) {
+        reject(e); // En lugar de devolver null, rechazamos la promesa con el error
+      }
+    });
 
-  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
-    try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-      const reader = new FileReader();
-      reader.readAsDataURL($event);
-      reader.onload = () => {
-        resolve({
-          base: reader.result
-        });
-      };
-      reader.onerror = error => {
-        reject(error);  // Aquí cambiamos resolve a reject para manejar el error correctamente
-      };
-  
-    } catch (e) {
-      reject(e);  // En lugar de devolver null, rechazamos la promesa con el error
-    }
-  });
-  
-
-  
   onSubmit(): void {
-    console.log('entrooooooo')
+    console.log('entrooooooo');
     if (this.form.invalid) {
-      console.log(this.form.valid);  // Debería mostrar 'true' si el formulario es válido
-console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
-
+      console.log(this.form.valid); // Debería mostrar 'true' si el formulario es válido
+      console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
     }
 
     const formData = new FormData();
@@ -192,22 +145,19 @@ console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
     const file = this.avatar[0];
     formData.append('avatar', file);
 
-    const image = this.image[0];
-    formData.append('backgroundImage', image);
-
     formData.forEach((value, key) => {
       console.log(key, value); // Verifica los datos del FormData
     });
 
     this.userService.createUser(formData).subscribe(
       (response: any) => {
+        localStorage.setItem('userEdit', JSON.stringify(response));
         this.showAlert = true;
       },
       (error) => {
         alert('Register failed');
       }
     );
-
   }
 
   clearImage() {
@@ -217,5 +167,10 @@ console.log(this.form.errors); // Si hay errores, deberían mostrarse aquí
 
   closeModal() {
     this.modalService.hideModal();
+  }
+
+  navigateHome() {
+    const userId = this.userId;
+    this.router.navigate([`/pages/${userId}/home`]);
   }
 }

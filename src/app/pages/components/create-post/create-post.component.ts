@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/components/service/auth.service';
 import { PostService } from '../../services/post.service';
 import { PostI } from 'src/app/models/post.interface';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-create-post',
@@ -14,18 +15,21 @@ export class CreatePostComponent {
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
   private readonly postService: PostService = inject(PostService);
   private readonly authService: AuthService = inject(AuthService);
+  private readonly notificationService: NotificationService = inject(NotificationService);
 
-  public userId: string | null = null; // Cambiado para obtener el ID desde localStorage
-  form: FormGroup; // Formulario para capturar el contenido del post
+
+  public userId: string | null = null;
+  form: FormGroup;
 
   public media: any[] = [];
-  public imageSrc: string | ArrayBuffer | null = null; // Vista previa de la imagen
+  public imageSrc: string | ArrayBuffer | null = null; 
 
   constructor(private sanitizer: DomSanitizer) {
     console.log('Constructor ejecutado: Inicializando componente');
     this.form = this.buildForm();
     this.getUserIdFromLocalStorage(); 
   }
+  
 
   ngOnInit(): void {
     console.log('ngOnInit ejecutado');
@@ -41,9 +45,9 @@ export class CreatePostComponent {
   buildForm(): FormGroup {
     console.log('Creando el formulario');
     return this.formBuilder.group({
-      text: ['', [Validators.required, Validators.minLength(2)]], // Campo de texto obligatorio
-      tag: ['', Validators.required], // Campo de categoría obligatorio
-      media: [null, Validators.required], // Campo de archivo obligatorio (imagen/video)
+      text: ['', [Validators.required, Validators.minLength(2)]], 
+      tag: ['', Validators.required], 
+      media: [null, Validators.required],
     });
   }
 
@@ -51,16 +55,15 @@ export class CreatePostComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const archivoCapturado = input.files[0];
-      console.log('Archivo capturado:', archivoCapturado); // Verifica el archivo capturado
+      console.log('Archivo capturado:', archivoCapturado); 
   
-      // Convertir a base64 para mostrar la vista previa de la imagen
       this.extraerBase64(archivoCapturado).then((imagen: any) => {
-        this.imageSrc = imagen.base; // Mostrar vista previa
+        this.imageSrc = imagen.base; 
       });
   
-      // Limpiar el arreglo media antes de agregar un nuevo archivo
+
       this.media = [];
-      this.media.push(archivoCapturado); // Agregar archivo al arreglo media
+      this.media.push(archivoCapturado); 
       console.log('Media después de agregar archivo:', this.media);
 
       this.form.patchValue({
@@ -68,6 +71,16 @@ export class CreatePostComponent {
       });
     }
   }
+
+  clearMedia(): void {
+  this.imageSrc = null; 
+  this.media = []; 
+  this.form.patchValue({
+    media: null
+  });
+  console.log('Imagen eliminada');
+}
+
   
 
   extraerBase64 = async ($event: any) =>
@@ -83,10 +96,10 @@ export class CreatePostComponent {
           });
         };
         reader.onerror = (error) => {
-          reject(error); // Aquí cambiamos resolve a reject para manejar el error correctamente
+          reject(error);
         };
       } catch (e) {
-        reject(e); // En lugar de devolver null, rechazamos la promesa con el error
+        reject(e); 
       }
     });
 
@@ -115,16 +128,41 @@ export class CreatePostComponent {
     formData.append('media', file);
 
     formData.forEach((value, key) => {
-      console.log(key, value); // Verifica los datos del FormData
+      console.log(key, value);
     });
 
     this.postService.createPost(formData).subscribe(
       (response: PostI) => {
-        console.log('Post creado exitosamente:', response);
+        console.log('Post creado exitosamente. Respuesta del servidor:', response);
+  
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const fullName = user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'Usuario desconocido';
+  
+        const notification = {
+          description: `Nuevo post creado: ${this.form.value.text}`,
+          username: fullName,
+          tag: this.form.value.tag,
+          postId: response?.id || null, 
+          status: false,
+        };
+  
+        console.log('Notificación preparada para enviar:', notification);
+  
+        this.notificationService.createNotification(notification).subscribe(
+          () => {
+            console.log('Notificación enviada correctamente.');
+          },
+          (error) => {
+            console.error('Error al enviar la notificación:', error);
+          }
+        );
+
+        window.location.reload();
       },
       (error) => {
         console.error('Error al crear el post:', error);
       }
     );
-  }
+
+}
 }

@@ -1,5 +1,4 @@
 {
-  
   "login": {
     "title": "Sign in to your account",
     "emailLabel": "Email Address",
@@ -43,36 +42,21 @@
   "dashboard": {
     "title": "No image available for this post."
   },
-  "nav": {
-    "search": "Search"
-  },
   "profile": {
-    "description": "“We cannot solve our problems with the same thinking we used when we created them.” -Albert Einstein"
+    "description": "“We cannot solve our problems with the same thinking we used when we created them.” -Albert Einstein",
+    "followers": "Followers",
+    "following": "Following",
+    "post": "Posts",
+    "information": "Details:",
+    "city": "Live in Quito",
+    "status": "Single",
+    "profession": "Software developer",
+    "edit": "Edit profile"
   },
-  "profile1": {
-    "followers": "Followers"
+  "nav": {
+    "logout": "Log out",
+    "search": "Search..."
   },
-  "profile2": {
-    "following": "Following"
-  },
-  "profile3": {
-    "post": "Posts"
-  },
-  "profile4": {
-    "information": "Details:"
-  },
-  "profile5": {
-    "city": "Live in Quito"
-  },
-  "profile6": {
-    "status": "Single"
-  },
-  "profile7": {
-    "profession": "Software developer"
-  },
-  "nav1": {
-    "logout": "Log out"
-     },
   "register": {
     "title": "Welcome!",
     "instruction": "Sign in to continue",
@@ -90,4 +74,6 @@
     "success_message": "Your account has been created successfully. Welcome!",
     "accept_button": "Accept"
   }
+
+
 }

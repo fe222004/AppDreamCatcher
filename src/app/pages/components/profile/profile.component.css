@@ -57,7 +57,7 @@ width: 300px;
   border-radius: 50%;
   border: 3px solid white;
   margin-top: -50px;
-  margin-left: 130px;
+  margin-left: 100px;
 }
 
 .name {
@@ -86,7 +86,7 @@ width: 300px;
 .description {
   font-size: 0.9rem;
   color: #555;
-  margin-top: 10px;
+  margin-top: 50px;
   line-height: 1.5;
 }
 .extra-info {
@@ -94,7 +94,7 @@ background-color: #f9f9f9;
 border: 1px solid #ddd;
 border-radius: 8px;
 padding: 15px;
-margin-top: 20px; /* Separar del bloque anterior */
+margin-top: 30px; /* Separar del bloque anterior */
 text-align: left;
 }
 

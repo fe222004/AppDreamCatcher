@@ -1,0 +1,177 @@
+.post-card {
+    display: flex; /* Hacer el diseño horizontal */
+    flex-direction: row; /* Elementos en fila */
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Evitar desbordamientos */
+    margin: 20px auto;
+    max-width: 1000px;
+    transition: all 0.3s ease-in-out;
+    height: 450px;
+    margin-top: 80px;
+  }
+  
+  /* Imagen del post */
+  .post-image img {
+    width: 600px; /* Tamaño fijo para imagen */
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 10px 15px;
+  }
+  
+  /* Encabezado del post */
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .username {
+    font-weight: bold;
+    color: #262626;
+  }
+  
+  .time {
+    font-size: 12px;
+    color: #8e8e8e;
+  }
+  
+  .options {
+    font-size: 20px;
+    cursor: pointer;
+    color: #8e8e8e;
+    margin-left: 120px;
+  }
+  
+  /* Acciones del post */
+  .actions {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .icon {
+    cursor: pointer;
+  }
+  
+  /* Pie del post */
+  .likes {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .caption {
+    font-size: 14px;
+    margin-bottom: 5px;
+    height: 200px;
+  }
+  
+  /* Comentarios */
+  .comment-section {
+    margin-top: 5px;
+    border-top: 1px solid #dbdbdb;
+    padding-top: 5px;
+  }
+  
+  .comment-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 5px 0;
+    color: #262626;
+  }
+  
+  .comment-input::placeholder {
+    color: #8e8e8e;
+  }
+  
+  /* Responsividad */
+  
+  /* Tablets */
+  @media (max-width: 768px) {
+    .post-card {
+      flex-direction: column; /* Cambia a vertical */
+      max-width: 90%; /* Más ajustado al espacio */
+      margin: 10px auto;
+    }
+  
+    .post-image img {
+      width: 100%; /* Imagen ocupa todo el ancho */
+      height: auto;
+    }
+  
+    .avatar {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .username {
+      font-size: 14px;
+    }
+  
+    .actions {
+      font-size: 18px;
+    }
+  }
+  
+  /* Móviles */
+  @media (max-width: 480px) {
+    .post-card {
+      border-radius: 0; /* Quitar bordes redondeados */
+      box-shadow: none; /* Quitar sombras */
+    }
+  
+    .post-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .avatar {
+      width: 35px;
+      height: 35px;
+      margin-bottom: 5px;
+    }
+  
+    .options {
+      font-size: 18px;
+    }
+  
+    .actions {
+      font-size: 16px;
+      gap: 8px;
+    }
+  
+    .likes,
+    .caption,
+    .time {
+      font-size: 12px;
+    }
+  
+    .post-image img {
+      height: 150px; /* Altura fija para móviles */
+    }
+  }

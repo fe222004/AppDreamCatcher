@@ -1,35 +1,45 @@
-<!-- Sección para previsualizar y seleccionar imagen -->
-<div class="input-group mb-3">
-    <!-- Selección de imagen -->
-    <div class="relative">
-      <div class="w-32 h-32 rounded-full bg-gray-200 overflow-hidden shadow-md">
-        <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
-        <label for="media" class="cursor-pointer w-full h-full flex items-center justify-center text-gray-600">
-          <!-- Vista previa de la imagen seleccionada -->
-          <img [src]="imageSrc" alt="Imagen seleccionada" class="w-full h-full object-cover" />
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div class="input-group mb-3 flex items-center">
+    <img class="rounded-circle profile-image mr-4"
+      src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image" />
+
+    <div class="inputs-container flex-grow">
+      <input type="text" class="form-control post-input mb-2" formControlName="text"
+        placeholder="¿Qué estás pensando?" />
+
+      <div class="flex items-center">
+        <select class="form-control post-input post-select flex-grow" formControlName="tag">
+          <option value="" disabled selected>Etiqueta</option>
+          <option value="amigos">Amigos</option>
+          <option value="familia">Familia</option>
+          <option value="comida">Comida</option>
+          <option value="trabajo">Trabajo</option>
+          <option value="deporte">Deporte</option>
+          <option value="musica">Música</option>
+        </select>
+
+        <!-- Botón para cargar imagen -->
+        <label for="media"
+          class="ml-2 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition">
+          <i class="bi bi-cloud-upload"></i>
         </label>
+        <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
       </div>
     </div>
   </div>
-  
-  <!-- Formulario para los inputs del post -->
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- Contenedor para los inputs de texto y etiqueta -->
-    <div class="input-group mb-3">
-      <!-- Imagen de perfil a la izquierda -->
-      <img class="rounded-full w-16 h-16 object-cover mr-4" src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image" />
-    
-      <!-- Contenedor para los inputs del post (texto y etiqueta) -->
-      <div class="w-full">
-        <!-- Input para el texto del post -->
-        <input type="text" class="form-control w-full mb-2" formControlName="text" placeholder="¿Qué estás pensando?" />
-  
-        <!-- Input para la etiqueta del post (ej. música, deporte, etc) -->
-        <input type="text" class="form-control w-full" formControlName="tag" placeholder="Etiqueta (Música, Deporte, etc)" />
-      </div>
+
+  <div class="separator"></div>
+
+  <div class="mb-4" *ngIf="imageSrc">
+    <div class="relative flex items-center justify-center">
+      <img [src]="imageSrc" alt="Imagen seleccionada" class="max-w-full max-h-64 rounded-lg shadow-md" />
+      <button type="button"
+        class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full shadow-md hover:bg-red-600 transition"
+        (click)="clearMedia()">
+        <i class="bi bi-x"></i>
+      </button>
     </div>
-  
-    <!-- Botón de publicar, visible siempre -->
-    <button type="submit" class="btn btn-custom-primary">Publicar</button>
-  </form>
-  
+  </div>
+  <button type="submit" class="btn btn-custom-primary">Publicar</button>
+</form>

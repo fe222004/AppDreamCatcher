@@ -1,83 +1,120 @@
-<div class="relative min-h-screen flex items-center justify-center bg-gray-50">
-    <div class="relative w-full max-w-5xl bg-white rounded-lg shadow-md overflow-hidden">
-        <!-- Background Image -->
-        <div class="relative h-48 bg-gray-300">
+<div
+  class="relative w-full max-w-5xl bg-white rounded-lg shadow-md overflow-hidden"
+>
 
-            <label for="background"
-                class="absolute inset-0 flex items-center justify-center cursor-pointer text-sm text-gray-600">
-                <input type="file" id="background" class="hidden" (change)="getFileBackImage($event)" />
-                <span *ngIf="!imageSrc" for="background" class="bg-white py-1 px-3 rounded shadow-md">Upload Background</span>
-                <img *ngIf="imageSrc" [src]="imageSrc" alt="Background"
-                    class="object-cover w-full h-full rounded-t-lg shadow-md" />
-            </label>
-
-        </div>
-
-        <!-- Avatar -->
-        <div class="relative -mt-16 flex justify-center">
-            <div class="w-32 h-32 rounded-full bg-gray-200 overflow-hidden shadow-md">
-                <input type="file" id="avatar" class="hidden" (change)="getFileAvatar($event)" accept="image/*" />
-                <label for="avatar" class="cursor-pointer w-full h-full flex items-center justify-center text-gray-600">
-                    <img [src]="avatarSrc" alt="+" class="w-full h-full object-cover" />
-                </label>
-            </div>
-        </div>
-
-        <!-- Button to change image -->
-        <div *ngIf="avatarSrc" class="flex justify-center">
-            <button type="button" class="btn btn-outline-primary mt-3" (click)="clearImage()">
-                {{ 'register.change' | translate }}
-            </button>
-        </div>
-
-
-        <!-- Form -->
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-6 space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label for="firstname" class="block text-sm font-medium text-gray-700">First Name</label>
-                    <input id="firstname" formControlName="firstname" type="text"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                </div>
-                <div>
-                    <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
-                    <input id="lastname" formControlName="lastname" type="text"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                </div>
-            </div>
-
-            <div>
-                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea id="description" formControlName="description"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label for="livesIn" class="block text-sm font-medium text-gray-700">Lives In</label>
-                    <input id="livesIn" formControlName="livesIn" type="text"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                </div>
-                <div>
-                    <label for="worksAt" class="block text-sm font-medium text-gray-700">Works At</label>
-                    <input id="worksAt" formControlName="worksAt" type="text"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                </div>
-            </div>
-
-            <div>
-                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select id="status" formControlName="status"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <option value="single">Single</option>
-                    <option value="married">Married</option>
-                </select>
-            </div>
-
-            <button type="submit"
-                class="w-full py-2 px-4 bg-blue-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Save Profile
-            </button>
-        </form>
+<button class="close-button" (click)="navigateHome(); closeModal()">&#10006;</button>
+  <!-- Avatar -->
+  <div class="relative -mt-16 flex justify-center" style="margin-top: 50px">
+    <div class="w-32 h-32 rounded-full bg-gray-200 overflow-hidden shadow-md">
+      <input
+        type="file"
+        id="avatar"
+        class="hidden"
+        (change)="getFileAvatar($event)"
+        accept="image/*"
+      />
+      <label
+        for="avatar"
+        class="cursor-pointer w-full h-full flex items-center justify-center text-gray-600"
+      >
+        <img [src]="avatarSrc" alt="+" class="w-full h-full object-cover" />
+      </label>
     </div>
+  </div>
+
+  <!-- Button to change image -->
+  <div *ngIf="avatarSrc" class="flex justify-center">
+    <button
+      type="button"
+      class="btn btn-outline-primary mt-3"
+      (click)="clearImage()"
+    >
+      {{ "register.change" | translate }}
+    </button>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-6 space-y-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="firstname" class="block text-sm font-medium text-gray-700"
+          >First Name</label
+        >
+        <input
+          id="firstname"
+          formControlName="firstname"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label for="lastname" class="block text-sm font-medium text-gray-700"
+          >Last Name</label
+        >
+        <input
+          id="lastname"
+          formControlName="lastname"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="description" class="block text-sm font-medium text-gray-700"
+        >Description</label
+      >
+      <textarea
+        id="description"
+        formControlName="description"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      ></textarea>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="livesIn" class="block text-sm font-medium text-gray-700"
+          >Lives In</label
+        >
+        <input
+          id="livesIn"
+          formControlName="livesIn"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label for="worksAt" class="block text-sm font-medium text-gray-700"
+          >Works At</label
+        >
+        <input
+          id="worksAt"
+          formControlName="worksAt"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="status" class="block text-sm font-medium text-gray-700"
+        >Status</label
+      >
+      <select
+        id="status"
+        formControlName="status"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      >
+        <option value="single">Single</option>
+        <option value="married">Married</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full py-2 px-4 bg-blue-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+    >
+      Save Profile
+    </button>
+  </form>
 </div>
