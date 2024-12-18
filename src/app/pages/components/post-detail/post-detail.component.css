@@ -15,7 +15,7 @@
   
   /* Imagen del post */
   .post-image img {
-    width: 600px; /* Tamaño fijo para imagen */
+    width: 500px; /* Tamaño fijo para imagen */
     height: 400px;
     object-fit: cover;
   }
@@ -62,7 +62,7 @@
     font-size: 20px;
     cursor: pointer;
     color: #8e8e8e;
-    margin-left: 120px;
+    margin-left: 230px;
   }
   
   /* Acciones del post */
