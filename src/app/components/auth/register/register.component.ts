@@ -10,6 +10,8 @@ import { UrlsConstants } from 'src/app/constants/urls.constants';
 import { DataTransferServiceService } from 'src/app/pages/services/data-transfer-service.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationConstants } from 'src/app/constants/validation.constants';
+import { LanguageConstants } from 'src/app/constants/language-constants';
+import { TranslationService } from 'src/app/pages/services/translation.service';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +25,7 @@ export class RegisterComponent {
   private formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private translationService: TranslationService = inject(TranslationService)
 
   public form: FormGroup;
   public showAlert: boolean = false;
@@ -31,6 +34,9 @@ export class RegisterComponent {
   urls = UrlsConstants;
   public showPassword: boolean = false;
   public showAlertForm: boolean = false;
+  showMenuI: boolean = false;
+  currentLanguage: 'en' | 'es' = 'es';
+  languages = LanguageConstants;
 
   constructor(private translate: TranslateService) {
     this.form = this.buildForm();
@@ -66,6 +72,25 @@ export class RegisterComponent {
         [Validators.required, Validators.pattern(RegexConstants.password)],
       ]
     });
+  }
+
+  toggleMenuI(): void {
+    this.showMenuI = !this.showMenuI;
+  }
+
+  closeMenu(): void {
+    this.showMenuI = false;
+  }
+
+  changeLanguage(language: 'en' | 'es', event: Event): void {
+    event.preventDefault();
+    this.translationService.setLanguage(language);
+    this.currentLanguage = language;
+    this.closeMenu();
+  }
+
+  getFlagUrl(language: 'en' | 'es'): string {
+    return LanguageConstants[language];
   }
 
   isFieldInvalid(field: string): boolean {
