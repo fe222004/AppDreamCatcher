@@ -21,10 +21,6 @@ const routes: Routes = [
       import('./pages/pages.module').then((m) => m.PagesModule),
     canActivate: [loginGuard],
   },
-  // {
-  //   path: ' home',
-  //   component: HomeComponent,
-  // },
   {
     path: '**',
     redirectTo: '',

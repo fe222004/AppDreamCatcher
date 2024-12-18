@@ -1,42 +1,45 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
   <div class="input-group mb-3 flex items-center">
     <img class="rounded-circle profile-image mr-4"
       src="https://i.pinimg.com/564x/40/76/79/407679d20088c659aba7a760c69dd7c3.jpg" alt="Profile Image" />
-    <div class="inputs-container">
-      <!-- Input para el texto del post -->
+
+    <div class="inputs-container flex-grow">
       <input type="text" class="form-control post-input mb-2" formControlName="text"
         placeholder="¿Qué estás pensando?" />
-      <!-- Select para la etiqueta del post -->
-      <select class="form-control post-input post-select" formControlName="tag">
-        <option value="" disabled selected>Etiqueta</option>
-        <option value="amigos">Amigos</option>
-        <option value="familia">Familia</option>
-        <option value="comida">Comida</option>
-        <option value="trabajo">Trabajo</option>
-        <option value="trabajo">Deporte</option>
-        <option value="trabajo">Música</option>
-      </select>
-    </div>
-  </div>
-  <div class="separator"></div>
-  <div class="input-group mb-3 image-container">
-    <div class="relative">
-      <div class="image-box" [ngClass]="{'image-selected': imageSrc}">
-        <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
-        <label for="media" class="cursor-pointer w-full h-full flex items-center justify-center">
-          <i *ngIf="!imageSrc" class="fas fa-image text-gray-500"></i>
-          <img *ngIf="imageSrc" [src]="imageSrc" alt="Imagen seleccionada" class="w-full h-full object-cover" />
+
+      <div class="flex items-center">
+        <select class="form-control post-input post-select flex-grow" formControlName="tag">
+          <option value="" disabled selected>Etiqueta</option>
+          <option value="amigos">Amigos</option>
+          <option value="familia">Familia</option>
+          <option value="comida">Comida</option>
+          <option value="trabajo">Trabajo</option>
+          <option value="deporte">Deporte</option>
+          <option value="musica">Música</option>
+        </select>
+
+        <!-- Botón para cargar imagen -->
+        <label for="media"
+          class="ml-2 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white cursor-pointer hover:bg-blue-600 transition">
+          <i class="bi bi-cloud-upload"></i>
         </label>
-        <button type="button" class="btn-circle btn-danger btn-tooltip" *ngIf="imageSrc" (click)="clearMedia()">
-          <i class="bi bi-x-lg" style="color: #dfdfdf"></i>
-          <span class="tooltip-eliminar">Eliminar</span>
-        </button>
+        <input type="file" id="media" class="hidden" (change)="getImageFile($event)" accept="image/*" />
       </div>
     </div>
   </div>
 
-  <!-- Botón de publicar, visible siempre -->
+  <div class="separator"></div>
+
+  <div class="mb-4" *ngIf="imageSrc">
+    <div class="relative flex items-center justify-center">
+      <img [src]="imageSrc" alt="Imagen seleccionada" class="max-w-full max-h-64 rounded-lg shadow-md" />
+      <button type="button"
+        class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full shadow-md hover:bg-red-600 transition"
+        (click)="clearMedia()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+  </div>
   <button type="submit" class="btn btn-custom-primary">Publicar</button>
 </form>

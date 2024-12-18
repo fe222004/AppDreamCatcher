@@ -18,11 +18,11 @@ export class CreatePostComponent {
   private readonly notificationService: NotificationService = inject(NotificationService);
 
 
-  public userId: string | null = null; // Cambiado para obtener el ID desde localStorage
-  form: FormGroup; // Formulario para capturar el contenido del post
+  public userId: string | null = null;
+  form: FormGroup;
 
   public media: any[] = [];
-  public imageSrc: string | ArrayBuffer | null = null; // Vista previa de la imagen
+  public imageSrc: string | ArrayBuffer | null = null; 
 
   constructor(private sanitizer: DomSanitizer) {
     console.log('Constructor ejecutado: Inicializando componente');
@@ -45,9 +45,9 @@ export class CreatePostComponent {
   buildForm(): FormGroup {
     console.log('Creando el formulario');
     return this.formBuilder.group({
-      text: ['', [Validators.required, Validators.minLength(2)]], // Campo de texto obligatorio
-      tag: ['', Validators.required], // Campo de categoría obligatorio
-      media: [null, Validators.required], // Campo de archivo obligatorio (imagen/video)
+      text: ['', [Validators.required, Validators.minLength(2)]], 
+      tag: ['', Validators.required], 
+      media: [null, Validators.required],
     });
   }
 
@@ -55,16 +55,15 @@ export class CreatePostComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const archivoCapturado = input.files[0];
-      console.log('Archivo capturado:', archivoCapturado); // Verifica el archivo capturado
+      console.log('Archivo capturado:', archivoCapturado); 
   
-      // Convertir a base64 para mostrar la vista previa de la imagen
       this.extraerBase64(archivoCapturado).then((imagen: any) => {
-        this.imageSrc = imagen.base; // Mostrar vista previa
+        this.imageSrc = imagen.base; 
       });
   
-      // Limpiar el arreglo media antes de agregar un nuevo archivo
+
       this.media = [];
-      this.media.push(archivoCapturado); // Agregar archivo al arreglo media
+      this.media.push(archivoCapturado); 
       console.log('Media después de agregar archivo:', this.media);
 
       this.form.patchValue({
@@ -74,10 +73,10 @@ export class CreatePostComponent {
   }
 
   clearMedia(): void {
-  this.imageSrc = null; // Limpiar la vista previa de la imagen
-  this.media = []; // Limpiar el arreglo media
+  this.imageSrc = null; 
+  this.media = []; 
   this.form.patchValue({
-    media: null // Limpiar el campo de formulario relacionado con la imagen
+    media: null
   });
   console.log('Imagen eliminada');
 }
@@ -97,10 +96,10 @@ export class CreatePostComponent {
           });
         };
         reader.onerror = (error) => {
-          reject(error); // Aquí cambiamos resolve a reject para manejar el error correctamente
+          reject(error);
         };
       } catch (e) {
-        reject(e); // En lugar de devolver null, rechazamos la promesa con el error
+        reject(e); 
       }
     });
 
@@ -129,7 +128,7 @@ export class CreatePostComponent {
     formData.append('media', file);
 
     formData.forEach((value, key) => {
-      console.log(key, value); // Verifica los datos del FormData
+      console.log(key, value);
     });
 
     this.postService.createPost(formData).subscribe(
@@ -143,8 +142,8 @@ export class CreatePostComponent {
           description: `Nuevo post creado: ${this.form.value.text}`,
           username: fullName,
           tag: this.form.value.tag,
-          postId: response?.id || null, // Asegurar que `response.id` exista
-          status: false, // Notificación no leída
+          postId: response?.id || null, 
+          status: false,
         };
   
         console.log('Notificación preparada para enviar:', notification);
@@ -157,6 +156,8 @@ export class CreatePostComponent {
             console.error('Error al enviar la notificación:', error);
           }
         );
+
+        window.location.reload();
       },
       (error) => {
         console.error('Error al crear el post:', error);

@@ -111,8 +111,7 @@ getFlagUrl(language: 'en' | 'es'): string {
     const userId = localStorage.getItem('userId');
     if (userId) {
       // Navegar a la ruta que incluye el userId
-      this.router.navigate([`${RoutesConstants.home}`]);
-    } else {
+      this.router.navigate([`${RoutesConstants.home}/${userId}`]);    } else {
       // Si no hay userId, navegar a la página principal por defecto
       this.router.navigate([RoutesConstants.home]);
     }
