@@ -8,21 +8,35 @@
     </div>
     <div class="bg-white p-8 rounded-lg shadow-lg lg:-ml-1">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <img class="mx-auto h-10 w-auto" [src]="urls.logos.logo" alt="Your Company">
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           {{ 'login.title' | translate }}
         </h2>
       </div>
 
-      <div class="absolute top-20 right-325 z-10">
-        <button (click)="gotoIndex()"
-          class="inline-flex items-center justify-center w-10 h-10 bg-indigo-600 rounded-md shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          title="Go to Home">
-          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
+      <!-- Icono de cambio de idioma -->
+      <div class="hidden lg:flex lg:ml-4 position-absolute top-16 right-0 mt-4 mr-4">
+        <div class="relative w-20 max-w-sm" (clickOutside)="closeMenu()">
+          <button (click)="toggleMenuI()"
+            class="flex items-center text-gray-600 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700">
+            <img [src]="getFlagUrl(currentLanguage)" alt="Current Language" class="h-3 w-3 rounded-full">
+            <span class="ml-1 text-[10px] font-medium">{{ currentLanguage.toUpperCase() }}</span>
+          </button>
+          <div *ngIf="showMenuI"
+            class="absolute right-0 mt-1 w-20 bg-white border border-gray-300 rounded-lg shadow-md">
+            <a href="#" (click)="changeLanguage('en', $event)"
+              class="flex items-center px-2 py-1 text-gray-600 hover:bg-gray-100">
+              <img [src]="getFlagUrl('en')" alt="English" class="h-3 w-3 rounded-full">
+              <span class="ml-1 text-[10px] font-medium">English</span>
+            </a>
+            <a href="#" (click)="changeLanguage('es', $event)"
+              class="flex items-center px-2 py-1 text-gray-600 hover:bg-gray-100">
+              <img [src]="getFlagUrl('es')" alt="Spanish" class="h-3 w-3 rounded-full">
+              <span class="ml-1 text-[10px] font-medium">Español</span>
+            </a>
+          </div>
+        </div>
       </div>
+
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6" action="#" method="POST">
@@ -89,4 +103,3 @@
     </div>
   </div>
 </div>
-

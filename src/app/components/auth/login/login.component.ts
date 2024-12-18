@@ -7,6 +7,8 @@ import { RoutesConstants } from 'src/app/constants/routes.constants';
 import { RegexConstants } from 'src/app/constants/regex.constants';
 import { ImageConstants } from 'src/app/constants/images.constants';
 import { UrlsConstants } from 'src/app/constants/urls.constants';
+import { TranslationService } from 'src/app/pages/services/translation.service';
+import { LanguageConstants } from 'src/app/constants/language-constants';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +22,16 @@ export class LoginComponent {
   private formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private translationService: TranslationService = inject(TranslationService)
 
   loginForm: FormGroup;
   public kitchenImage: String;
   public kitchenImageTwo: String;
   urls = UrlsConstants;
   public showPassword: boolean = false;
+  showMenuI: boolean = false;
+  currentLanguage: 'en' | 'es' = 'es';
+  languages = LanguageConstants;
 
   constructor() {
     this.loginForm = this.buildForm();
@@ -47,6 +53,24 @@ export class LoginComponent {
     }));
   }
 
+  toggleMenuI(): void {
+    this.showMenuI = !this.showMenuI;
+  }
+
+closeMenu(): void {
+  this.showMenuI = false;
+  }
+
+changeLanguage(language: 'en' | 'es', event: Event): void {
+  event.preventDefault();
+  this.translationService.setLanguage(language);
+  this.currentLanguage = language;
+  this.closeMenu();
+}
+
+getFlagUrl(language: 'en' | 'es'): string {
+  return LanguageConstants[language];
+  }
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
