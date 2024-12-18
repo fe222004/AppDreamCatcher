@@ -4,6 +4,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
+import { AuthService } from 'src/app/components/service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -24,7 +25,8 @@ export class NavComponent {
     private searchService: searchService,
     private postService: PostService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.searchSubject
       .pipe(debounceTime(300)) // Espera 300 ms tras el último input
@@ -38,6 +40,10 @@ export class NavComponent {
 
   closeModal() {
     this.isModalVisible = false; // Cierra el modal
+  }
+
+  logout() {
+    this.authService.logout(); 
   }
 
   @HostListener('document:click', ['$event'])
