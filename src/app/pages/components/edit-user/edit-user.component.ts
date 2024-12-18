@@ -153,6 +153,7 @@ export class EditUserComponent {
       (response: any) => {
         localStorage.setItem('userEdit', JSON.stringify(response));
         this.showAlert = true;
+        window.location.reload();
       },
       (error) => {
         alert('Register failed');
